@@ -1,12 +1,15 @@
-package idat.edu.pe.apiPetit.Service;
+package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.AccountDTO;
 import idat.edu.pe.apiPetit.Entity.Account;
+import idat.edu.pe.apiPetit.Entity.AccountType;
 import idat.edu.pe.apiPetit.Entity.User;
 import idat.edu.pe.apiPetit.Exceptions.AppException;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.AccountRepository;
+import idat.edu.pe.apiPetit.Repository.AccountTypeRepository;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
+import idat.edu.pe.apiPetit.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,13 +18,16 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class AccountServiceImp implements AccountService{
+public class AccountServiceImp implements AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AccountTypeRepository accountTypeRepository;
 
     private Account mapingEntity(AccountDTO accountDTO){
         Account account = new Account();
@@ -44,11 +50,12 @@ public class AccountServiceImp implements AccountService{
     }
 
     @Override
-    public AccountDTO createAccount(Integer userId, AccountDTO accountDTO) {
-
+    public AccountDTO createAccount(Integer accountTypeId, Integer userId, AccountDTO accountDTO) {
         Account account = mapingEntity(accountDTO);
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+        AccountType accountType = accountTypeRepository.findById(accountTypeId).orElseThrow(()-> new ResourceNotFoundException("AccountType", "id", accountTypeId));
         account.setUser(user);
+        account.setAccountType(accountType);
         Account newAccount = accountRepository.save(account);
         AccountDTO accountResponse = mapingDTO(newAccount);
 

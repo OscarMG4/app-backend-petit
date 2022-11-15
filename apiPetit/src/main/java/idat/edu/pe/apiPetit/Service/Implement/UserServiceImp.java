@@ -1,9 +1,10 @@
-package idat.edu.pe.apiPetit.Service;
+package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.UserDTO;
 import idat.edu.pe.apiPetit.Entity.User;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
+import idat.edu.pe.apiPetit.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

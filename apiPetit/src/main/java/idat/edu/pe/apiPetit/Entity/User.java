@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"dni", "phone", "photo"})})
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class User {
     @Column(name = "lastNames", nullable = false, length = 40)
 	@NotBlank
     private String lastNames;
-    @Column(name = "dni", nullable = false, length = 8)
+    @Column(name = "dni", nullable = false, length = 8, unique = true)
 	@NotBlank
     private String dni;
     @Column(name = "phone", nullable = false, length = 9)

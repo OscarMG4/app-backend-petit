@@ -2,14 +2,14 @@ package idat.edu.pe.apiPetit.Dto;
 
 public class StateDTO {
     private Integer id;
-    private String name;
+    private String state;
 
     public StateDTO() {
     }
 
-    public StateDTO(Integer id, String name) {
+    public StateDTO(Integer id, String state) {
         this.id = id;
-        this.name = name;
+        this.state = state;
     }
 
     public Integer getId() {
@@ -20,11 +20,11 @@ public class StateDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getState() {
+        return state;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setState(String state) {
+        this.state = state;
     }
 }

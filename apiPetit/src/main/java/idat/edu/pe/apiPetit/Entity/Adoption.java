@@ -1,6 +1,7 @@
 package idat.edu.pe.apiPetit.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "adoptions")
@@ -9,6 +10,7 @@ public class Adoption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAdoption;
     @Column(name = "description", nullable = false, length = 100)
+    @NotBlank
     private String description;
     @ManyToOne
     @JoinColumn(

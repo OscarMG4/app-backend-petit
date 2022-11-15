@@ -6,18 +6,15 @@ public class QuoteDTO {
     private Integer id;
     private LocalDateTime dateIssued;
     private LocalDateTime dateAttention;
-
-    private String typeService;
     private Double price;
 
     public QuoteDTO() {
     }
 
-    public QuoteDTO(Integer id, LocalDateTime dateIssued, LocalDateTime dateAttention, String typeService, Double price) {
+    public QuoteDTO(Integer id, LocalDateTime dateIssued, LocalDateTime dateAttention, Double price) {
         this.id = id;
         this.dateIssued = dateIssued;
         this.dateAttention = dateAttention;
-        this.typeService = typeService;
         this.price = price;
     }
 
@@ -43,14 +40,6 @@ public class QuoteDTO {
 
     public void setDateAttention(LocalDateTime dateAttention) {
         this.dateAttention = dateAttention;
-    }
-
-    public String getTypeService() {
-        return typeService;
-    }
-
-    public void setTypeService(String typeService) {
-        this.typeService = typeService;
     }
 
     public Double getPrice() {

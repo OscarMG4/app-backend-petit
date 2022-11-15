@@ -2,7 +2,6 @@ package idat.edu.pe.apiPetit.Dto;
 
 public class PetDTO {
     private Integer id;
-    private String typePet;
     private String name;
     private String sex;
     private String race;
@@ -11,9 +10,8 @@ public class PetDTO {
     public PetDTO() {
     }
 
-    public PetDTO(Integer id, String typePet, String name, String sex, String race, String age) {
+    public PetDTO(Integer id, String name, String sex, String race, String age) {
         this.id = id;
-        this.typePet = typePet;
         this.name = name;
         this.sex = sex;
         this.race = race;
@@ -26,14 +24,6 @@ public class PetDTO {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTypePet() {
-        return typePet;
-    }
-
-    public void setTypePet(String typePet) {
-        this.typePet = typePet;
     }
 
     public String getName() {

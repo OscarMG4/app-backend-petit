@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AccountService {
-    AccountDTO createAccount(Integer userId, AccountDTO accountDTO);
+    AccountDTO createAccount(Integer accountTypeId, Integer userId, AccountDTO accountDTO);
     List<AccountDTO> showAccountsByUserId(@Param("idUser") Integer userId);
     AccountDTO showAccountById(Integer userId, Integer accountId);
     AccountDTO updateAccount(Integer userId, Integer accountId, AccountDTO accountDTO);

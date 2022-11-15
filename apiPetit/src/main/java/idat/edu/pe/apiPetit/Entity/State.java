@@ -11,9 +11,9 @@ public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idState;
-    @Column(name = "name", nullable = false, length = 10, unique = true)
+    @Column(name = "state", nullable = false, length = 15, unique = true)
     @NotBlank
-    private String name;
+    private String state;
     @OneToMany(mappedBy = "state", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Quote> quotes = new ArrayList<>();
     @OneToMany(mappedBy = "state", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -22,9 +22,9 @@ public class State {
     public State() {
     }
 
-    public State(Integer idState, String name) {
+    public State(Integer idState, String state) {
         this.idState = idState;
-        this.name = name;
+        this.state = state;
     }
 
     public Integer getIdState() {
@@ -35,11 +35,27 @@ public class State {
         this.idState = idState;
     }
 
-    public String getName() {
-        return name;
+    public String getState() {
+        return state;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public List<Quote> getQuotes() {
+        return quotes;
+    }
+
+    public void setQuotes(List<Quote> quotes) {
+        this.quotes = quotes;
+    }
+
+    public List<Adoption> getAdoptions() {
+        return adoptions;
+    }
+
+    public void setAdoptions(List<Adoption> adoptions) {
+        this.adoptions = adoptions;
     }
 }

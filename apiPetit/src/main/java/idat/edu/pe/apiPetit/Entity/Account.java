@@ -17,6 +17,12 @@ public class Account {
     private String pass;
     @ManyToOne
     @JoinColumn(
+            name="id_account_type",
+            nullable = false,
+            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_account_type) references accounts_types(id_account_type)"))
+    private AccountType accountType;
+    @ManyToOne
+    @JoinColumn(
             name="id_user",
             nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_user) references users(id_user)"))
@@ -25,10 +31,11 @@ public class Account {
     public Account() {
     }
 
-    public Account(Integer idAccount, String email, String pass, User user) {
+    public Account(Integer idAccount, String email, String pass, AccountType accountType, User user) {
         this.idAccount = idAccount;
         this.email = email;
         this.pass = pass;
+        this.accountType = accountType;
         this.user = user;
     }
 
@@ -62,5 +69,13 @@ public class Account {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 }

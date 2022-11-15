@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface AdoptionRepository extends JpaRepository<Adoption, Integer> {
 
-    @Query(value = "select u.id_user, a.id_adoption, a.description, p.id_pet, s.id_state from adoptions as a\n" +
+    @Query(value = "select u.id_user, u.names, u.last_names, a.id_adoption, a.description, p.id_pet, p.name, s.id_state, s.state  from adoptions as a\n" +
             "inner join pets as p on a.id_pet like p.id_pet \n" +
             "inner join states as s on a.id_state like s.id_state\n" +
             "inner join users as u on a.id_user like u.id_user\n" +

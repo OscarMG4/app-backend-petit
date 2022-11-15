@@ -1,16 +1,17 @@
-package idat.edu.pe.apiPetit.Service;
+package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.StateDTO;
 import idat.edu.pe.apiPetit.Entity.State;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.StateRepository;
+import idat.edu.pe.apiPetit.Service.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class StateServiceImp implements StateService{
+public class StateServiceImp implements StateService {
 
     @Autowired
     private StateRepository stateRepository;
@@ -19,7 +20,7 @@ public class StateServiceImp implements StateService{
         StateDTO stateDTO = new StateDTO();
 
         stateDTO.setId(state.getIdState());
-        stateDTO.setName(state.getName());
+        stateDTO.setState(state.getState());
 
         return stateDTO;
     }
@@ -28,7 +29,7 @@ public class StateServiceImp implements StateService{
         State state = new State();
 
         state.setIdState(stateDTO.getId());
-        state.setName(stateDTO.getName());
+        state.setState(stateDTO.getState());
 
         return state;
     }
@@ -58,7 +59,7 @@ public class StateServiceImp implements StateService{
     public StateDTO updateState(StateDTO stateDTO, Integer id) {
         State stateId = stateRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("State", "id", id));
 
-        stateId.setName(stateDTO.getName());
+        stateId.setState(stateDTO.getState());
 
         State stateUpdated = stateRepository.save(stateId);
 

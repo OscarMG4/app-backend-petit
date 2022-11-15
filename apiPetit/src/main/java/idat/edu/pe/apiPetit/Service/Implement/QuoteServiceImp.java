@@ -1,17 +1,22 @@
-package idat.edu.pe.apiPetit.Service;
+package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.QuoteDTO;
 import idat.edu.pe.apiPetit.Entity.Quote;
+import idat.edu.pe.apiPetit.Entity.ServiceType;
 import idat.edu.pe.apiPetit.Entity.State;
 import idat.edu.pe.apiPetit.Entity.User;
 import idat.edu.pe.apiPetit.Exceptions.AppException;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.QuoteRepository;
+import idat.edu.pe.apiPetit.Repository.ServiceTypeRepository;
 import idat.edu.pe.apiPetit.Repository.StateRepository;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
+import idat.edu.pe.apiPetit.Service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +25,9 @@ public class QuoteServiceImp implements QuoteService {
 
     @Autowired
     private QuoteRepository quoteRepository;
+
+    @Autowired
+    private ServiceTypeRepository serviceTypeRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -50,12 +58,14 @@ public class QuoteServiceImp implements QuoteService {
     }
 
     @Override
-    public QuoteDTO createQuote(Integer userId, Integer stateId, QuoteDTO quoteDTO) {
+    public QuoteDTO createQuote(Integer serviceTypeId, Integer userId, Integer stateId, QuoteDTO quoteDTO) {
         Quote quote = mapingEntity(quoteDTO);
 
+        ServiceType serviceType = serviceTypeRepository.findById(serviceTypeId).orElseThrow(()-> new ResourceNotFoundException("ServiceType", "id", serviceTypeId));
         User user = userRepository.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
         State state = stateRepository.findById(stateId).orElseThrow(()-> new ResourceNotFoundException("State", "id", stateId));
 
+        quote.setTypeService(serviceType);
         quote.setUser(user);
         quote.setState(state);
 
@@ -77,7 +87,7 @@ public class QuoteServiceImp implements QuoteService {
         Quote quote = quoteRepository.findById(quoteId).orElseThrow(()->new ResourceNotFoundException("Quote", "id", quoteId));
 
         if(!quote.getUser().getIdUser().equals(user.getIdUser())){
-            throw new AppException(HttpStatus.BAD_REQUEST, "La cuenta no existe!");
+            throw new AppException(HttpStatus.BAD_REQUEST, "La cita no existe!");
         }
 
         return mapingDTO(quote);

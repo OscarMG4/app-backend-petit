@@ -1,4 +1,4 @@
-package idat.edu.pe.apiPetit.Service;
+package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.AdoptionDTO;
 import idat.edu.pe.apiPetit.Entity.Adoption;
@@ -11,6 +11,7 @@ import idat.edu.pe.apiPetit.Repository.AdoptionRepository;
 import idat.edu.pe.apiPetit.Repository.PetRepository;
 import idat.edu.pe.apiPetit.Repository.StateRepository;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
+import idat.edu.pe.apiPetit.Service.AdoptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AdoptionSeviceImp implements AdoptionService{
+public class AdoptionSeviceImp implements AdoptionService {
 
     @Autowired
     private AdoptionRepository adoptionRepository;

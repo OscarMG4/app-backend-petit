@@ -11,9 +11,6 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPet;
-    @Column(name = "typePet", nullable = false, length = 10)
-    @NotBlank
-    private String typePet;
     @Column(name = "name", nullable = false, length = 10)
     @NotBlank
     private String name;
@@ -28,17 +25,24 @@ public class Pet {
     private String age;
     @OneToMany(mappedBy = "pet", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Adoption> adoptions = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(
+            name="id_pet_type",
+            nullable = false,
+            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_pet_type) references pets_types(id_pet_type)"))
+    private PetType petType;
 
     public Pet() {
     }
 
-    public Pet(Integer idPet, String typePet, String name, String sex, String race, String age) {
+    public Pet(Integer idPet, String name, String sex, String race, String age, List<Adoption> adoptions, PetType petType) {
         this.idPet = idPet;
-        this.typePet = typePet;
         this.name = name;
         this.sex = sex;
         this.race = race;
         this.age = age;
+        this.adoptions = adoptions;
+        this.petType = petType;
     }
 
     public Integer getIdPet() {
@@ -47,14 +51,6 @@ public class Pet {
 
     public void setIdPet(Integer idPet) {
         this.idPet = idPet;
-    }
-
-    public String getTypePet() {
-        return typePet;
-    }
-
-    public void setTypePet(String typePet) {
-        this.typePet = typePet;
     }
 
     public String getName() {
@@ -95,5 +91,13 @@ public class Pet {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public PetType getPetType() {
+        return petType;
+    }
+
+    public void setPetType(PetType petType) {
+        this.petType = petType;
     }
 }

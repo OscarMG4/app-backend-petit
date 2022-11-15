@@ -10,8 +10,9 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-    @Query(value="select u.id_user, a.id_account, a.email , a.pass from accounts as a\n" +
+    @Query(value="select u.id_user, u.names, u.last_names, a.id_account, a.email , a.pass, tc.id_account_type, tc.account_type from accounts as a\n" +
             "inner join users as u on a.id_user like u.id_user\n" +
+            "inner join accounts_types as tc on a.id_account like tc.id_account_type\n" +
             "where a.id_user like %:idUser%", nativeQuery=true)
     List<Account> findByUserId(@Param("idUser") Integer idUser);
 

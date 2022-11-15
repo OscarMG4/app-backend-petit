@@ -11,17 +11,16 @@ public class Quote {
     private Integer idQuote;
     @Column(name = "date_issued", nullable = false)
     private LocalDateTime dateIssued;
-    @Column(name = "date_attention", nullable = false)
+    @Column(name = "date_attention", nullable = false, unique = true)
     private LocalDateTime dateAttention;
-
     @Column(name = "price", nullable = false)
     private Double price;
     @ManyToOne
     @JoinColumn(
-            name="id_type_service",
+            name="id_service_type",
             nullable = false,
-            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_type_service) references types_services(id_type_service)"))
-    private TypeService typeService;
+            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_service_type) references services_types(id_service_type)"))
+    private ServiceType serviceType;
     @ManyToOne
     @JoinColumn(
             name="id_user",
@@ -38,12 +37,12 @@ public class Quote {
     public Quote() {
     }
 
-    public Quote(Integer idQuote, LocalDateTime dateIssued, LocalDateTime dateAttention, Double price, TypeService typeService, User user, State state) {
+    public Quote(Integer idQuote, LocalDateTime dateIssued, LocalDateTime dateAttention, Double price, ServiceType serviceType, User user, State state) {
         this.idQuote = idQuote;
         this.dateIssued = dateIssued;
         this.dateAttention = dateAttention;
         this.price = price;
-        this.typeService = typeService;
+        this.serviceType = serviceType;
         this.user = user;
         this.state = state;
     }
@@ -80,12 +79,12 @@ public class Quote {
         this.price = price;
     }
 
-    public TypeService getTypeService() {
-        return typeService;
+    public ServiceType getTypeService() {
+        return serviceType;
     }
 
-    public void setTypeService(TypeService typeService) {
-        this.typeService = typeService;
+    public void setTypeService(ServiceType serviceType) {
+        this.serviceType = serviceType;
     }
 
     public User getUser() {

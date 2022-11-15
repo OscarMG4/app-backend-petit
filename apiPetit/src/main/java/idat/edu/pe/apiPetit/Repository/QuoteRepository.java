@@ -10,9 +10,10 @@ import java.util.List;
 @Repository
 public interface QuoteRepository extends JpaRepository<Quote, Integer> {
 
-    @Query(value = "select u.id_user, q.id_quote , q.date_issued, q.date_attention, q.type_service, q.price, s.id_state, s.name from quotes as q\n" +
+    @Query(value = "select u.id_user, u.names, u.last_names, q.id_quote , q.date_issued, q.date_attention, st.id_service_type, st.service_type, q.price, s.id_state, s.state from quotes as q\n" +
+            "inner join services_types as st on q.id_service_type like st.id_service_type\n" +
             "inner join users as u on q.id_user like u.id_user\n" +
-            "inner join states as s on q.id_state like s.id_state \n" +
+            "inner join states as s on q.id_state like s.id_state\n" +
             "where q.id_user like %:idUser%", nativeQuery = true)
     List<Quote> findByUserId(@Param("idUser") Integer idUser);
 
