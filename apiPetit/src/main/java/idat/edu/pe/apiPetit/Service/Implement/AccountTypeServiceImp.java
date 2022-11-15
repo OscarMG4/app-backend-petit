@@ -45,6 +45,7 @@ public class AccountTypeServiceImp implements AccountTypeService {
         return accountTypeResponse;
     }
 
+
     @Override
     public List<AccountTypeDTO> showAccountType() {
         List<AccountType> accountTypes = accountTypeRepository.findAll();

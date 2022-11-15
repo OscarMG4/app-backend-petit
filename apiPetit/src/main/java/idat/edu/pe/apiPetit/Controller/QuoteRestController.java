@@ -1,5 +1,6 @@
 package idat.edu.pe.apiPetit.Controller;
 
+import idat.edu.pe.apiPetit.Dto.AdoptionDTO;
 import idat.edu.pe.apiPetit.Dto.QuoteDTO;
 import idat.edu.pe.apiPetit.Service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class QuoteRestController {
     public ResponseEntity<QuoteDTO> saveQuote(@PathVariable(name = "serviceTypeId") Integer serviceTypeId, @PathVariable(name = "userId") Integer userId, @PathVariable(name = "stateId") Integer stateId, @RequestBody QuoteDTO quoteDTO){
         return new ResponseEntity<>(quoteService.createQuote(serviceTypeId, userId, stateId, quoteDTO), HttpStatus.CREATED);
     }
+
+    @RequestMapping(path = "/listQuotes", method = RequestMethod.GET)
+    public List<QuoteDTO> listQuote(){
+        return quoteService.showQuotes();
+    }
+
 
     @RequestMapping(path = "/users/{userId}/listQuotes", method = RequestMethod.GET)
     public List<QuoteDTO> showQuotesByUser(@PathVariable(name = "userId") Integer userId){

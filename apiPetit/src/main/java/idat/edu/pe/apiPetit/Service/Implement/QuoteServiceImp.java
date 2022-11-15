@@ -76,6 +76,12 @@ public class QuoteServiceImp implements QuoteService {
     }
 
     @Override
+    public List<QuoteDTO> showQuotes() {
+        List<Quote> quotes = quoteRepository.findAll();
+        return quotes.stream().map(quote -> mapingDTO(quote)).collect(Collectors.toList());
+    }
+
+    @Override
     public List<QuoteDTO> showQuoteByUserId(Integer userId) {
         List<Quote> quotes = quoteRepository.findByUserId(userId);
         return quotes.stream().map(quote -> mapingDTO(quote)).collect(Collectors.toList());

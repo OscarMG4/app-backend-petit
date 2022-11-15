@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AccountService {
     AccountDTO createAccount(Integer accountTypeId, Integer userId, AccountDTO accountDTO);
+    List<AccountDTO> showAccounts();
     List<AccountDTO> showAccountsByUserId(@Param("idUser") Integer userId);
     AccountDTO showAccountById(Integer userId, Integer accountId);
     AccountDTO updateAccount(Integer userId, Integer accountId, AccountDTO accountDTO);

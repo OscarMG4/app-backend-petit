@@ -26,7 +26,7 @@ public class PetRestController {
         return petService.showPets();
     }
 
-  @RequestMapping(path = "/pets/petTypeId/{petTypeId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/pets/petTypeId/{petTypeId}", method = RequestMethod.GET)
     public List<PetDTO> showPetsByTypeId(@PathVariable(name = "petTypeId") Integer petTypeId){
         return petService.showPetsByTypeId(petTypeId);
     }
@@ -36,18 +36,18 @@ public class PetRestController {
         return petService.showPetsByType(petType);
     }
 
-    @RequestMapping(path = "/pets/{petTypeId}/listPets/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/pets/{petTypeId}/{id}", method = RequestMethod.GET)
     public ResponseEntity<PetDTO> showPetId(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id){
         return new ResponseEntity<>(petService.showPetsId(petTypeId, id), HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/pets/{petTypeId}/listPets/{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/pets/{petTypeId}/{id}", method = RequestMethod.PUT)
     public ResponseEntity<PetDTO> updatePet(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id, @RequestBody PetDTO petDTO){
         PetDTO petResponse = petService.updatePet(petDTO, id, petTypeId);
         return new ResponseEntity<>(petResponse, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/pets/{petTypeId}/listPets/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/pets/{petTypeId}/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deletePet(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id){
         petService.deletePet(petTypeId, id);
         return new ResponseEntity<>("Mascota eliminada!", HttpStatus.OK);

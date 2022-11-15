@@ -8,6 +8,7 @@ import java.util.List;
 public interface AdoptionService {
 
     AdoptionDTO createAdoption(Integer idPet, Integer idState, Integer idUser, AdoptionDTO adoptionDTO);
+    List<AdoptionDTO> showAdoptions();
     List<AdoptionDTO> showAdoptionsByUserId(@Param("idUser") Integer userId);
     AdoptionDTO showAdoptionById(Integer idUser, Integer idAdoption);
     AdoptionDTO updateAdoption(Integer idUser, Integer idAdoption, AdoptionDTO adoptionDTO);

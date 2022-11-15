@@ -71,6 +71,12 @@ public class AdoptionSeviceImp implements AdoptionService {
     }
 
     @Override
+    public List<AdoptionDTO> showAdoptions() {
+        List<Adoption> adoptions = adoptionRepository.findAll();
+        return adoptions.stream().map(adoption -> mappingDTO(adoption)).collect(Collectors.toList());
+    }
+
+    @Override
     public List<AdoptionDTO> showAdoptionsByUserId(Integer userId) {
         List<Adoption> adoptions = adoptionRepository.findByIdUser(userId);
         return adoptions.stream().map(adoption -> mappingDTO(adoption)).collect(Collectors.toList());

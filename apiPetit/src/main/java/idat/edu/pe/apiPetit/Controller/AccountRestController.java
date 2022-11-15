@@ -1,6 +1,7 @@
 package idat.edu.pe.apiPetit.Controller;
 
 import idat.edu.pe.apiPetit.Dto.AccountDTO;
+import idat.edu.pe.apiPetit.Dto.PetDTO;
 import idat.edu.pe.apiPetit.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,11 @@ public class AccountRestController {
     @RequestMapping(path = "/users/{accountTypeId}/{userId}/createAccount", method = RequestMethod.POST)
     public ResponseEntity<AccountDTO> saveAccount(@PathVariable(name = "accountTypeId") Integer accountTypeId, @PathVariable(name = "userId") Integer userId, @RequestBody AccountDTO accountDTO){
         return new ResponseEntity<>(accountService.createAccount(accountTypeId, userId, accountDTO), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(path = "/listAccounts", method = RequestMethod.GET)
+    public List<AccountDTO> listAccount(){
+        return accountService.showAccounts();
     }
 
     @RequestMapping(path = "/users/{userId}/listAccounts", method = RequestMethod.GET)

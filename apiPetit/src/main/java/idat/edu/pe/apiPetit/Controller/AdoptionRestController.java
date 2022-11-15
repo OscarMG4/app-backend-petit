@@ -21,6 +21,11 @@ public class AdoptionRestController {
         return new ResponseEntity<>(adoptionService.createAdoption(userId, stateId, petId, adoptionDTO), HttpStatus.CREATED);
     }
 
+    @RequestMapping(path = "/listAdoptions", method = RequestMethod.GET)
+    public List<AdoptionDTO> listAdoption(){
+        return adoptionService.showAdoptions();
+    }
+
     @RequestMapping(path = "/users/{userId}/listAdoptions", method = RequestMethod.GET)
     public List<AdoptionDTO> showAdoptionsByUser(@PathVariable(name = "userId") Integer userId){
         return adoptionService.showAdoptionsByUserId(userId);

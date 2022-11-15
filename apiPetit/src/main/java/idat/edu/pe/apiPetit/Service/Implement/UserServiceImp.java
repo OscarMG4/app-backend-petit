@@ -62,6 +62,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public List<UserDTO> findByEmail(String email) {
+        List<User> users = userRepository.findByEmail(email);
+        return users.stream().map(user -> mapingDTO(user)).collect(Collectors.toList());
+    }
+
+    @Override
     public UserDTO showUsersId(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         return mapingDTO(user);

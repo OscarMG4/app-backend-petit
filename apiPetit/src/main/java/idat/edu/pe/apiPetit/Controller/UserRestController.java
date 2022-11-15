@@ -1,5 +1,6 @@
 package idat.edu.pe.apiPetit.Controller;
 
+import idat.edu.pe.apiPetit.Dto.PetDTO;
 import idat.edu.pe.apiPetit.Dto.UserDTO;
 import idat.edu.pe.apiPetit.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class UserRestController {
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> showUserId(@PathVariable(name = "id") Integer id){
         return ResponseEntity.ok(userService.showUsersId(id));
+    }
+
+    @RequestMapping(path = "/email/{email}", method = RequestMethod.GET)
+    public List<UserDTO> showUserByEmail(@PathVariable(name = "email") String email){
+        return userService.findByEmail(email);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)

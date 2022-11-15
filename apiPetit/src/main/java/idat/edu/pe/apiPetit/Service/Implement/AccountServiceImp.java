@@ -63,6 +63,12 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
+    public List<AccountDTO> showAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream().map(account -> mapingDTO(account)).collect(Collectors.toList());
+    }
+
+    @Override
     public List<AccountDTO> showAccountsByUserId(Integer userId) {
         List<Account> accounts = accountRepository.findByUserId(userId);
         return accounts.stream().map(account -> mapingDTO(account)).collect(Collectors.toList());
