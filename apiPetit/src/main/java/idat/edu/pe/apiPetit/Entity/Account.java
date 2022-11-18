@@ -27,16 +27,22 @@ public class Account {
             nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_user) references users(id_user)"))
     private User user;
+    @JoinColumn(
+            name="id_role",
+            nullable = false,
+            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_role) references roles(id_role)"))
+    private Role role;
 
     public Account() {
     }
 
-    public Account(Integer idAccount, String email, String pass, AccountType accountType, User user) {
+    public Account(Integer idAccount, String email, String pass, AccountType accountType, User user, Role role) {
         this.idAccount = idAccount;
         this.email = email;
         this.pass = pass;
         this.accountType = accountType;
         this.user = user;
+        this.role = role;
     }
 
     public Integer getIdAccount() {
@@ -77,5 +83,13 @@ public class Account {
 
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -23,8 +23,8 @@ public class User {
     @Column(name = "phone", nullable = false, length = 9)
 	@NotBlank
     private String phone;
-    @Column(name = "photo", nullable = false, length = 300)
-    private String photo;
+    @Column(name = "photo", nullable = false, length = 100000)
+    private Byte photo;
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
 	private List<Account> accounts = new ArrayList<>();
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
@@ -35,7 +35,7 @@ public class User {
 	public User() {
 	}
 
-	public User(Integer idUser, String names, String lastNames, String dni, String phone, String photo) {
+	public User(Integer idUser, String names, String lastNames, String dni, String phone, Byte photo) {
 		this.idUser = idUser;
 		this.names = names;
 		this.lastNames = lastNames;
@@ -84,11 +84,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getPhoto() {
+	public Byte getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(Byte photo) {
 		this.photo = photo;
 	}
 

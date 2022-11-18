@@ -8,12 +8,12 @@ public class UserDTO {
     private String lastNames;
     private String dni;
     private String phone;
-    private String photo;
+    private Byte photo;
     
 	public UserDTO() {
 	}
 
-	public UserDTO(Integer id, String names, String lastNames, String dni, String phone, String photo) {
+	public UserDTO(Integer id, String names, String lastNames, String dni, String phone, Byte photo) {
 		this.id = id;
 		this.names = names;
 		this.lastNames = lastNames;
@@ -62,11 +62,11 @@ public class UserDTO {
 		this.phone = phone;
 	}
 
-	public String getPhoto() {
+	public Byte getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(Byte photo) {
 		this.photo = photo;
 	}
 }
