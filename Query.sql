@@ -28,3 +28,7 @@ where a.id_user like 1;
 select u.id_user, u.names, u.last_names, u.dni, u.phone, u.photo, a.id_account, a.email from users as u
 inner join accounts as a on a.id_user like u.id_user 
 where a.email like 'oscar@gmail.com'; 
+
+select u.id_user, u.names, u.last_names, a.id_account, a.email from accounts as a
+inner join users as u on u.id_user like a.id_user 
+where a.email like 'oscar@gmail.com'; 

@@ -27,6 +27,7 @@ public class Account {
             nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_user) references users(id_user)"))
     private User user;
+    @ManyToOne
     @JoinColumn(
             name="id_role",
             nullable = false,
@@ -69,20 +70,20 @@ public class Account {
         this.pass = pass;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public AccountType getAccountType() {
         return accountType;
     }
 
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Role getRole() {

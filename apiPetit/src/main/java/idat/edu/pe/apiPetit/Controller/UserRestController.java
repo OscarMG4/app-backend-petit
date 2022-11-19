@@ -1,6 +1,5 @@
 package idat.edu.pe.apiPetit.Controller;
 
-import idat.edu.pe.apiPetit.Dto.PetDTO;
 import idat.edu.pe.apiPetit.Dto.UserDTO;
 import idat.edu.pe.apiPetit.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
