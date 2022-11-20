@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -16,5 +19,8 @@ public interface QuoteRepository extends JpaRepository<Quote, Integer> {
             "inner join states as s on q.id_state like s.id_state\n" +
             "where q.id_user like %:idUser%", nativeQuery = true)
     List<Quote> findByUserId(@Param("idUser") Integer idUser);
+
+    @Query(value = "select count(q.id_quote) from quotes q where q.date_attention like %:dateAttention%", nativeQuery = true)
+    Integer countQuotesDates(@Param("dateAttention") LocalDate dateAttention);
 
 }

@@ -31,8 +31,6 @@ public class AccountServiceImp implements AccountService {
     @Autowired
     private AccountTypeRepository accountTypeRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
 
     private Account mapingEntity(AccountDTO accountDTO){
         Account account = new Account();
@@ -55,15 +53,13 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
-    public AccountDTO createAccount(Integer accountTypeId, Integer userId, Integer roleId, AccountDTO accountDTO) {
+    public AccountDTO createAccount(Integer accountTypeId, Integer userId, AccountDTO accountDTO) {
         Account account = mapingEntity(accountDTO);
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
         AccountType accountType = accountTypeRepository.findById(accountTypeId).orElseThrow(()-> new ResourceNotFoundException("AccountType", "id", accountTypeId));
-        Role role = roleRepository.findById(roleId).orElseThrow(()-> new ResourceNotFoundException("Role", "id", roleId));
 
         account.setUser(user);
         account.setAccountType(accountType);
-        account.setRole(role);
         Account newAccount = accountRepository.save(account);
         AccountDTO accountResponse = mapingDTO(newAccount);
 

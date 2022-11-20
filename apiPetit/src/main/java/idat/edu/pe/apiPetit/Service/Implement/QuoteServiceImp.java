@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +59,213 @@ public class QuoteServiceImp implements QuoteService {
         return quoteDTO;
     }
 
+    public boolean validateDate(LocalDate localDate) {
+        Integer amount = quoteRepository.countQuotesDates(localDate);
+
+        if (amount >= 5) return false;
+        else return true;
+    }
+
+    public static List<LocalDate> showDates() {
+        List<LocalDate> dates = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+
+        int day, month, year;
+
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH) + 1;
+        year = calendar.get(Calendar.YEAR);
+
+        switch (month) {
+            case 1:
+                for (int i = 0; i < 32; i++) {
+                    if (day == 32) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 2:
+                if (year % 4 == 0) {
+                    for (int i = 0; i < 30; i++) {
+                        if (day == 30) {
+                            day = 1;
+                            month++;
+                            dates.add(LocalDate.of(year, month, day));
+                            day++;
+                        } else {
+                            dates.add(LocalDate.of(year, month, day));
+                            day++;
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < 29; i++) {
+                        if (day == 29) {
+                            day = 1;
+                            month++;
+                            dates.add(LocalDate.of(year, month, day));
+                            day++;
+                        } else {
+                            dates.add(LocalDate.of(year, month, day));
+                            day++;
+                        }
+                    }
+                }
+
+                break;
+
+            case 3:
+                for (int i = 0; i < 32; i++) {
+                    if (day == 32) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 4:
+                for (int i = 0; i < 31; i++) {
+                    if (day == 31) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 5:
+                for (int i = 0; i < 32; i++) {
+                    if (day == 32) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 6:
+                for (int i = 0; i < 31; i++) {
+                    if (day == 31) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 7:
+                for (int i = 0; i < 32; i++) {
+                    if (day == 32) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 8:
+                for (int i = 0; i < 32; i++) {
+                    if (day == 32) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 9:
+                for (int i = 0; i < 31; i++) {
+                    if (day == 31) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 10:
+                for (int i = 0; i < 32; i++) {
+                    if (day == 32) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 11:
+                for (int i = 0; i < 31; i++) {
+                    if (day == 31) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+            case 12:
+                for (int i = 0; i < 32; i++) {
+                    if (day == 32) {
+                        day = 1;
+                        month++;
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    } else {
+                        dates.add(LocalDate.of(year, month, day));
+                        day++;
+                    }
+                }
+
+                break;
+        }
+
+        return dates;
+    }
+
     @Override
     public QuoteDTO createQuote(Integer serviceTypeId, Integer userId, Integer stateId, QuoteDTO quoteDTO) {
         Quote quote = mapingEntity(quoteDTO);
@@ -85,6 +294,19 @@ public class QuoteServiceImp implements QuoteService {
     public List<QuoteDTO> showQuoteByUserId(Integer userId) {
         List<Quote> quotes = quoteRepository.findByUserId(userId);
         return quotes.stream().map(quote -> mapingDTO(quote)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LocalDate> countQuotes() {
+        List<LocalDate> list = showDates();
+        List<LocalDate> outputList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            boolean isValid = validateDate(list.get(i));
+            if (isValid) outputList.add(list.get(i));
+        }
+
+        return outputList;
     }
 
     @Override

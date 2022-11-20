@@ -24,7 +24,7 @@ public class User {
 	@NotBlank
     private String phone;
     @Column(name = "photo", nullable = false, length = 100000)
-    private Byte photo;
+    private byte[] photo;
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
 	private List<Account> accounts = new ArrayList<>();
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
@@ -35,7 +35,7 @@ public class User {
 	public User() {
 	}
 
-	public User(Integer idUser, String names, String lastNames, String dni, String phone, Byte photo) {
+	public User(Integer idUser, String names, String lastNames, String dni, String phone, byte[] photo) {
 		this.idUser = idUser;
 		this.names = names;
 		this.lastNames = lastNames;
@@ -84,11 +84,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public Byte getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(Byte photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 

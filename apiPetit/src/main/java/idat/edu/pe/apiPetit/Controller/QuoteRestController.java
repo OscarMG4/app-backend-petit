@@ -1,6 +1,5 @@
 package idat.edu.pe.apiPetit.Controller;
 
-import idat.edu.pe.apiPetit.Dto.AdoptionDTO;
 import idat.edu.pe.apiPetit.Dto.QuoteDTO;
 import idat.edu.pe.apiPetit.Service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -31,6 +31,11 @@ public class QuoteRestController {
     @RequestMapping(path = "/users/{userId}/listQuotes", method = RequestMethod.GET)
     public List<QuoteDTO> showQuotesByUser(@PathVariable(name = "userId") Integer userId){
         return quoteService.showQuoteByUserId(userId);
+    }
+
+    @RequestMapping(path = "/countQuotes", method = RequestMethod.GET)
+    public List<LocalDate> countQuotes(){
+        return quoteService.countQuotes();
     }
 
     @RequestMapping(path = "/users/{userId}/listQuotes/{id}", method = RequestMethod.GET)

@@ -32,3 +32,15 @@ where a.email like 'oscar@gmail.com';
 select u.id_user, u.names, u.last_names, a.id_account, a.email from accounts as a
 inner join users as u on u.id_user like a.id_user 
 where a.email like 'oscar@gmail.com'; 
+
+select a.id_account, a.email, r.`role` from roles as r
+inner join accounts as a on a.id_account like r.id_account 
+where a.id_account like 1; 
+
+select count(q.date_attention) from quotes as q where q.date_attention like '2022-11-16 15:46:50.778000';
+
+
+        
+
+
+

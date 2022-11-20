@@ -17,9 +17,9 @@ public class AccountRestController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(path = "/users/{accountTypeId}/{userId}/{roleId}/createAccount", method = RequestMethod.POST)
-    public ResponseEntity<AccountDTO> saveAccount(@PathVariable(name = "accountTypeId") Integer accountTypeId, @PathVariable(name = "userId") Integer userId, @PathVariable(name = "roleId") Integer roleId, @RequestBody AccountDTO accountDTO){
-        return new ResponseEntity<>(accountService.createAccount(accountTypeId, userId, roleId, accountDTO), HttpStatus.CREATED);
+    @RequestMapping(path = "/users/{accountTypeId}/{userId}/createAccount", method = RequestMethod.POST)
+    public ResponseEntity<AccountDTO> saveAccount(@PathVariable(name = "accountTypeId") Integer accountTypeId, @PathVariable(name = "userId") Integer userId, @RequestBody AccountDTO accountDTO){
+        return new ResponseEntity<>(accountService.createAccount(accountTypeId, userId, accountDTO), HttpStatus.CREATED);
     }
 
     @RequestMapping(path = "/listAccounts", method = RequestMethod.GET)

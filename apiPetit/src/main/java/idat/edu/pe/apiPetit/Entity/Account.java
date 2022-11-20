@@ -2,6 +2,8 @@ package idat.edu.pe.apiPetit.Entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
@@ -9,10 +11,10 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAccount;
-    @Column(name = "email", nullable = false, length = 25, unique = true)
+    @Column(name = "email", nullable = false, length = 50, unique = true)
     @NotBlank
     private String email;
-    @Column(name = "pass", nullable = false, length = 25)
+    @Column(name = "pass", nullable = false)
     @NotBlank
     private String pass;
     @ManyToOne
@@ -27,23 +29,18 @@ public class Account {
             nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_user) references users(id_user)"))
     private User user;
-    @ManyToOne
-    @JoinColumn(
-            name="id_role",
-            nullable = false,
-            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_role) references roles(id_role)"))
-    private Role role;
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Role> roles  = new ArrayList<>();
 
     public Account() {
     }
 
-    public Account(Integer idAccount, String email, String pass, AccountType accountType, User user, Role role) {
+    public Account(Integer idAccount, String email, String pass, AccountType accountType, User user) {
         this.idAccount = idAccount;
         this.email = email;
         this.pass = pass;
         this.accountType = accountType;
         this.user = user;
-        this.role = role;
     }
 
     public Integer getIdAccount() {
@@ -86,11 +83,11 @@ public class Account {
         this.user = user;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

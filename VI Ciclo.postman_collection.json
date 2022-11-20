@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"names\": \"Oscar Fernando\",\r\n    \"lastNames\": \"Muñoz Gayoso\",\r\n    \"dni\": \"74888178\",\r\n    \"phone\": \"981692345\",\r\n    \"photo\": \"https://asokokfasacsaxca-lim1-1.xx.fbcdnwfdewfdw.net/v/t39.30808-6/\"\r\n}",
+							"raw": "{\r\n    \"names\": \"Oscar Fernando\",\r\n    \"lastNames\": \"Muñoz Gayoso\",\r\n    \"dni\": \"74888178\",\r\n    \"phone\": \"981692345\",\r\n    \"photo\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,7 +114,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"names\": \"Cristian Mariano\",\r\n    \"lastNames\": \"Zapata Saenz\",\r\n    \"dni\": \"74382478\",\r\n    \"phone\": \"981692345\",\r\n    \"photo\": \"https://corolerdssasd-limites-1.xx.fbcdnwfdewfdw.net.core/v/t39.30808-6/\"\r\n}",
+							"raw": "{\r\n    \"names\": \"Cristian Mariano\",\r\n    \"lastNames\": \"Zapata Saenz\",\r\n    \"dni\": \"74382478\",\r\n    \"phone\": \"981692345\",\r\n    \"photo\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -288,6 +288,172 @@
 								"api",
 								"states",
 								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ApiPetitRol",
+			"item": [
+				{
+					"name": "CrearRol",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/petit/api/roles/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"petit",
+								"api",
+								"roles",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarRoles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/petit/api/roles/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"petit",
+								"api",
+								"roles",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarRol",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/petit/api/roles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"petit",
+								"api",
+								"roles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarRol",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/petit/api/roles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"petit",
+								"api",
+								"roles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarRol",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/petit/api/roles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"petit",
+								"api",
+								"roles",
+								"1"
 							]
 						}
 					},
@@ -763,7 +929,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/petit/api/users/1/1/createAccount",
+							"raw": "http://localhost:8080/petit/api/users/1/1/1/createAccount",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -773,6 +939,7 @@
 								"petit",
 								"api",
 								"users",
+								"1",
 								"1",
 								"1",
 								"createAccount"
@@ -1281,7 +1448,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/petit/api/users/2/1/2/createAdoption",
+							"raw": "http://localhost:8080/petit/api/users/1/1/1/createAdoption",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1291,9 +1458,9 @@
 								"petit",
 								"api",
 								"users",
-								"2",
 								"1",
-								"2",
+								"1",
+								"1",
 								"createAdoption"
 							]
 						}
