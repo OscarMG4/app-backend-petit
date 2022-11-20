@@ -39,7 +39,12 @@ where a.id_account like 1;
 
 select count(q.date_attention) from quotes as q where q.date_attention like '2022-11-16 15:46:50.778000';
 
-
+INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 15:46:50.778000', '2022-11-14 15:46:50.778000', '23.20', '1', '1', '1');
+INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 17:46:50.778000', '2022-11-14 13:46:50.778000', '23.20', '1', '1', '2');
+INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 16:46:50.778000', '2022-11-14 10:46:50.778000', '23.20', '1', '1', '1');
+INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 18:46:50.778000', '2022-11-16 14:46:50.778000', '23.20', '1', '1', '3');
+INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 19:46:50.778000', '2022-11-16 16:46:50.778000', '23.20', '1', '1', '2');
+INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 20:46:50.778000', '2022-11-16 18:46:50.778000', '23.20', '1', '1', '2');
         
 
 
