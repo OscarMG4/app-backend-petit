@@ -29,7 +29,7 @@ public class Account {
             nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_user) references users(id_user)"))
     private User user;
-    @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.EAGER)
     private List<Role> roles  = new ArrayList<>();
 
     public Account() {

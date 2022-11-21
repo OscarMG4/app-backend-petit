@@ -4,7 +4,6 @@ import idat.edu.pe.apiPetit.Entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -57,8 +56,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
             @Override
             public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
                 Map<String, Object> additionalInformation = new HashMap<>();
-                additionalInformation.put("Rol", role.getRole());
-
+                //additionalInformation.put("Rol", role.getRole());
                 DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(oAuth2AccessToken);
                 token.setAdditionalInformation(additionalInformation);
 

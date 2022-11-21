@@ -29,10 +29,9 @@ public class AccountDetailService implements UserDetailsService {
             List <GrantedAuthority> listGranted = new ArrayList<>();
 
             for (int i = 0; i < account.getRoles().size(); i++) {
-                listGranted.add(new SimpleGrantedAuthority(account.getRoles().get(i).getRole()));
+                listGranted.add(new SimpleGrantedAuthority("ROLE_" + account.getRoles().get(i).getRole()));
             }
 
-            GrantedAuthority granted = new SimpleGrantedAuthority(account.getRoles().toString());
             return new User(
                     account.getEmail(),
                     account.getPass(),
