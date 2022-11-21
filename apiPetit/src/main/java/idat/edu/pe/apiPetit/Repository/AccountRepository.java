@@ -16,5 +16,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
             "where a.id_user like %:idUser%", nativeQuery=true)
     List<Account> findByUserId(@Param("idUser") Integer idUser);
 
-    //Account findByAccount(String account);
+    @Query(value="select * from accounts as a where a.email like %:account%", nativeQuery=true)
+    Account findByAccount(@Param("account") String account);
 }
