@@ -4,7 +4,7 @@ package idat.edu.pe.apiPetit.Dto;
 //import idat.edu.pe.apiPetit.Entity.Account;
 //import idat.edu.pe.apiPetit.Entity.Adoption;
 //import idat.edu.pe.apiPetit.Entity.Quote;
-//
+
 //import java.util.List;
 
 public class UserDTO {
