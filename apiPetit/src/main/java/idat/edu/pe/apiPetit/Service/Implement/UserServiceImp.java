@@ -5,6 +5,7 @@ import idat.edu.pe.apiPetit.Entity.User;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
 import idat.edu.pe.apiPetit.Service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,42 +16,16 @@ import java.util.stream.Collectors;
 public class UserServiceImp implements UserService {
 
     @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
     private UserRepository userRepository;
-
-    //Convierte DTO a entidad
-    private User mapingEntity(UserDTO userDTO){
-        User user = new User();
-
-        user.setIdUser(userDTO.getId());
-        user.setNames(userDTO.getNames());
-        user.setLastNames(userDTO.getLastNames());
-        user.setDni(userDTO.getDni());
-        user.setPhone(userDTO.getPhone());
-        user.setPhoto(userDTO.getPhoto());
-
-        return user;
-    }
-
-    //Convierte entidad a DTO
-    private UserDTO mapingDTO(User user){
-        UserDTO userDTO = new UserDTO();
-
-        userDTO.setId(user.getIdUser());
-        userDTO.setNames(user.getNames());
-        userDTO.setLastNames(user.getLastNames());
-        userDTO.setDni(user.getDni());
-        userDTO.setPhone(user.getPhone());
-        userDTO.setPhoto(user.getPhoto());
-
-        return userDTO;
-    }
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
 
-        User user = mapingEntity(userDTO);
+        User user = mappingEntity(userDTO);
         User newUser = userRepository.save(user);
-        UserDTO userResponse = mapingDTO(newUser);
+        UserDTO userResponse = mappingDTO(newUser);
 
         return userResponse;
     }
@@ -58,19 +33,19 @@ public class UserServiceImp implements UserService {
     @Override
     public List<UserDTO> showUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream().map(user -> mapingDTO(user)).collect(Collectors.toList());
+        return users.stream().map(user -> mappingDTO(user)).collect(Collectors.toList());
     }
 
     @Override
     public List<UserDTO> findByEmail(String email) {
         List<User> users = userRepository.findByEmail(email);
-        return users.stream().map(user -> mapingDTO(user)).collect(Collectors.toList());
+        return users.stream().map(user -> mappingDTO(user)).collect(Collectors.toList());
     }
 
     @Override
     public UserDTO showUsersId(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
-        return mapingDTO(user);
+        return mappingDTO(user);
     }
 
     @Override
@@ -84,7 +59,7 @@ public class UserServiceImp implements UserService {
         userId.setPhoto(userDTO.getPhoto());
 
         User userUpdated = userRepository.save(userId);
-        return mapingDTO(userUpdated);
+        return mappingDTO(userUpdated);
     }
 
     @Override
@@ -93,5 +68,16 @@ public class UserServiceImp implements UserService {
         userRepository.delete(userId);
     }
 
+    //Convierte DTO a entidad
+    private User mappingEntity(UserDTO userDTO){
+        User user = modelMapper.map(userDTO, User.class);
+        return user;
+    }
+
+    //Convierte entidad a DTO
+    private UserDTO mappingDTO(User user){
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        return userDTO;
+    }
 
 }

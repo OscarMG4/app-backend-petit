@@ -5,6 +5,7 @@ import idat.edu.pe.apiPetit.Entity.ServiceType;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.ServiceTypeRepository;
 import idat.edu.pe.apiPetit.Service.ServiceTypeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,31 +16,15 @@ import java.util.stream.Collectors;
 public class ServiceTypeServiceImp implements ServiceTypeService {
 
     @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
     private ServiceTypeRepository serviceTypeRepository;
-
-    private ServiceType mapingEntity(ServiceTypeDTO serviceTypeDTO){
-        ServiceType serviceType = new ServiceType();
-
-        serviceType.setIdServiceType(serviceTypeDTO.getId());
-        serviceType.setServiceType(serviceTypeDTO.getServiceType());
-
-        return serviceType;
-    }
-
-    private ServiceTypeDTO mapingDTO(ServiceType serviceType){
-        ServiceTypeDTO serviceTypeDTO = new ServiceTypeDTO();
-
-        serviceTypeDTO.setId(serviceType.getIdServiceType());
-        serviceTypeDTO.setServiceType(serviceType.getServiceType());
-
-        return serviceTypeDTO;
-    }
 
     @Override
     public ServiceTypeDTO createServiceType(ServiceTypeDTO serviceTypeDTO) {
-        ServiceType serviceType = mapingEntity(serviceTypeDTO);
+        ServiceType serviceType = mappingEntity(serviceTypeDTO);
         ServiceType newServiceType = serviceTypeRepository.save(serviceType);
-        ServiceTypeDTO serviceTypeResponse = mapingDTO(newServiceType);
+        ServiceTypeDTO serviceTypeResponse = mappingDTO(newServiceType);
 
         return serviceTypeResponse;
     }
@@ -47,13 +32,13 @@ public class ServiceTypeServiceImp implements ServiceTypeService {
     @Override
     public List<ServiceTypeDTO> showServicesTypes() {
         List<ServiceType> servicesTypes = serviceTypeRepository.findAll();
-        return servicesTypes.stream().map(serviceType -> mapingDTO(serviceType)).collect(Collectors.toList());
+        return servicesTypes.stream().map(serviceType -> mappingDTO(serviceType)).collect(Collectors.toList());
     }
 
     @Override
     public ServiceTypeDTO showServiceTypeById(Integer id) {
         ServiceType serviceTypeId = serviceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("ServiceType", "id", id));
-        ServiceTypeDTO serviceTypeResponse = mapingDTO(serviceTypeId);
+        ServiceTypeDTO serviceTypeResponse = mappingDTO(serviceTypeId);
 
         return serviceTypeResponse;
     }
@@ -65,7 +50,7 @@ public class ServiceTypeServiceImp implements ServiceTypeService {
         serviceTypeId.setServiceType(serviceTypeDTO.getServiceType());
 
         ServiceType serviceTypeUpdated = serviceTypeRepository.save(serviceTypeId);
-        ServiceTypeDTO serviceTypeResponse = mapingDTO(serviceTypeUpdated);
+        ServiceTypeDTO serviceTypeResponse = mappingDTO(serviceTypeUpdated);
 
         return serviceTypeResponse;
     }
@@ -74,5 +59,15 @@ public class ServiceTypeServiceImp implements ServiceTypeService {
     public void deleteServiceType(Integer id) {
         ServiceType serviceTypeId = serviceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("ServiceType", "id", id));
         serviceTypeRepository.delete(serviceTypeId);
+    }
+
+    private ServiceType mappingEntity(ServiceTypeDTO serviceTypeDTO){
+        ServiceType serviceType = modelMapper.map(serviceTypeDTO, ServiceType.class);
+        return serviceType;
+    }
+
+    private ServiceTypeDTO mappingDTO(ServiceType serviceType){
+        ServiceTypeDTO serviceTypeDTO = modelMapper.map(serviceType, ServiceTypeDTO.class);
+        return serviceTypeDTO;
     }
 }

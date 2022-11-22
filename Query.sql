@@ -37,7 +37,12 @@ select a.id_account, a.email, r.`role` from roles as r
 inner join accounts as a on a.id_account like r.id_account 
 where a.id_account like 1; 
 
+select * from accounts as a where a.email like 'oscar@gmail.com';
+
+select * from roles;
+
 select count(q.date_attention) from quotes as q where q.date_attention like '2022-11-16 15:46:50.778000';
+
 
 INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 15:46:50.778000', '2022-11-14 15:46:50.778000', '23.20', '1', '1', '1');
 INSERT INTO bd_petit.quotes (date_attention, date_issued, price, id_service_type, id_state, id_user) VALUES ('2022-11-16 17:46:50.778000', '2022-11-14 13:46:50.778000', '23.20', '1', '1', '2');

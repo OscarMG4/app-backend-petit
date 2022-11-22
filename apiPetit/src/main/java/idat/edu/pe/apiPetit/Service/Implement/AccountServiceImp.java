@@ -12,6 +12,7 @@ import idat.edu.pe.apiPetit.Repository.AccountTypeRepository;
 import idat.edu.pe.apiPetit.Repository.RoleRepository;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
 import idat.edu.pe.apiPetit.Service.AccountService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
 public class AccountServiceImp implements AccountService {
 
     @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
@@ -32,36 +36,16 @@ public class AccountServiceImp implements AccountService {
     private AccountTypeRepository accountTypeRepository;
 
 
-    private Account mapingEntity(AccountDTO accountDTO){
-        Account account = new Account();
-
-        account.setIdAccount(accountDTO.getId());
-        account.setEmail(accountDTO.getEmail());
-        account.setPass(accountDTO.getPass());
-
-        return account;
-    }
-
-    private AccountDTO mapingDTO(Account account){
-        AccountDTO accountDTO = new AccountDTO();
-
-        accountDTO.setId(account.getIdAccount());
-        accountDTO.setEmail(account.getEmail());
-        accountDTO.setPass(account.getPass());
-
-        return accountDTO;
-    }
-
     @Override
     public AccountDTO createAccount(Integer accountTypeId, Integer userId, AccountDTO accountDTO) {
-        Account account = mapingEntity(accountDTO);
+        Account account = mappingEntity(accountDTO);
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
         AccountType accountType = accountTypeRepository.findById(accountTypeId).orElseThrow(()-> new ResourceNotFoundException("AccountType", "id", accountTypeId));
 
         account.setUser(user);
         account.setAccountType(accountType);
         Account newAccount = accountRepository.save(account);
-        AccountDTO accountResponse = mapingDTO(newAccount);
+        AccountDTO accountResponse = mappingDTO(newAccount);
 
         return accountResponse;
     }
@@ -69,13 +53,13 @@ public class AccountServiceImp implements AccountService {
     @Override
     public List<AccountDTO> showAccounts() {
         List<Account> accounts = accountRepository.findAll();
-        return accounts.stream().map(account -> mapingDTO(account)).collect(Collectors.toList());
+        return accounts.stream().map(account -> mappingDTO(account)).collect(Collectors.toList());
     }
 
     @Override
     public List<AccountDTO> showAccountsByUserId(Integer userId) {
         List<Account> accounts = accountRepository.findByUserId(userId);
-        return accounts.stream().map(account -> mapingDTO(account)).collect(Collectors.toList());
+        return accounts.stream().map(account -> mappingDTO(account)).collect(Collectors.toList());
     }
 
     @Override
@@ -87,7 +71,7 @@ public class AccountServiceImp implements AccountService {
             throw new AppException(HttpStatus.BAD_REQUEST, "La cuenta no existe!");
         }
 
-        return mapingDTO(account);
+        return mappingDTO(account);
     }
 
     @Override
@@ -104,7 +88,7 @@ public class AccountServiceImp implements AccountService {
 
         Account accountUpdate = accountRepository.save(account);
 
-        return mapingDTO(accountUpdate);
+        return mappingDTO(accountUpdate);
     }
 
     @Override
@@ -117,6 +101,16 @@ public class AccountServiceImp implements AccountService {
         }
 
         accountRepository.delete(account);
+    }
+
+    private Account mappingEntity(AccountDTO accountDTO){
+        Account account = modelMapper.map(accountDTO, Account.class);
+        return account;
+    }
+
+    private AccountDTO mappingDTO(Account account){
+        AccountDTO accountDTO = modelMapper.map(account, AccountDTO.class);
+        return accountDTO;
     }
 
 }

@@ -12,6 +12,7 @@ import idat.edu.pe.apiPetit.Repository.PetRepository;
 import idat.edu.pe.apiPetit.Repository.StateRepository;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
 import idat.edu.pe.apiPetit.Service.AdoptionService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 @Service
 public class AdoptionSeviceImp implements AdoptionService {
 
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private AdoptionRepository adoptionRepository;
 
@@ -34,23 +37,6 @@ public class AdoptionSeviceImp implements AdoptionService {
     @Autowired
     private StateRepository stateRepository;
 
-    private AdoptionDTO mappingDTO(Adoption adoption){
-        AdoptionDTO adoptionDTO = new AdoptionDTO();
-
-        adoptionDTO.setId(adoption.getIdAdoption());
-        adoptionDTO.setDescription(adoption.getDescription());
-
-        return adoptionDTO;
-    }
-
-    private Adoption mappingEntity(AdoptionDTO adoptionDTO){
-        Adoption adoption = new Adoption();
-
-        adoption.setIdAdoption(adoptionDTO.getId());
-        adoption.setDescription(adoptionDTO.getDescription());
-
-        return adoption;
-    }
 
     @Override
     public AdoptionDTO createAdoption(Integer idPet, Integer idState, Integer idUser, AdoptionDTO adoptionDTO) {
@@ -122,4 +108,15 @@ public class AdoptionSeviceImp implements AdoptionService {
 
         adoptionRepository.delete(adoption);
     }
+
+    private AdoptionDTO mappingDTO(Adoption adoption){
+        AdoptionDTO adoptionDTO = modelMapper.map(adoption, AdoptionDTO.class);
+        return adoptionDTO;
+    }
+
+    private Adoption mappingEntity(AdoptionDTO adoptionDTO){
+        Adoption adoption = modelMapper.map(adoptionDTO, Adoption.class);
+        return adoption;
+    }
+
 }

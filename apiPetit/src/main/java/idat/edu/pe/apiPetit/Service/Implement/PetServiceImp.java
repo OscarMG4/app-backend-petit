@@ -9,6 +9,7 @@ import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.PetRepository;
 import idat.edu.pe.apiPetit.Repository.PetTypeRepository;
 import idat.edu.pe.apiPetit.Service.PetService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,46 +19,25 @@ import java.util.stream.Collectors;
 
 @Service
 public class PetServiceImp implements PetService {
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Autowired
     private PetRepository petRepository;
 
     @Autowired
     private PetTypeRepository petTypeRepository;
 
-    private Pet mapingEntity(PetDTO petDTO){
-        Pet pet = new Pet();
-
-        pet.setIdPet(petDTO.getId());
-        pet.setName(petDTO.getName());
-        pet.setSex(petDTO.getSex());
-        pet.setRace(petDTO.getRace());
-        pet.setAge(petDTO.getAge());
-
-        return pet;
-    }
-
-    private PetDTO mapingDTO(Pet pet){
-        PetDTO petDTO = new PetDTO();
-
-        petDTO.setId(pet.getIdPet());
-        petDTO.setName(pet.getName());
-        petDTO.setSex(pet.getSex());
-        petDTO.setRace(pet.getRace());
-        petDTO.setAge(pet.getAge());
-
-        return petDTO;
-    }
-
-
     @Override
     public PetDTO createPet(Integer petTypeId, PetDTO petDTO) {
-        Pet pet = mapingEntity(petDTO);
+        Pet pet = mappingEntity(petDTO);
         PetType petType = petTypeRepository.findById(petTypeId).orElseThrow(()-> new ResourceNotFoundException("PetType", "id", petTypeId));
 
         pet.setPetType(petType);
 
         Pet newPet = petRepository.save(pet);
-        PetDTO petResponse = mapingDTO(newPet);
+        PetDTO petResponse = mappingDTO(newPet);
 
         return petResponse;
     }
@@ -65,19 +45,19 @@ public class PetServiceImp implements PetService {
     @Override
     public List<PetDTO> showPets() {
         List<Pet> pets = petRepository.findAll();
-        return pets.stream().map(pet -> mapingDTO(pet)).collect(Collectors.toList());
+        return pets.stream().map(pet -> mappingDTO(pet)).collect(Collectors.toList());
     }
 
     @Override
     public List<PetDTO> showPetsByTypeId(Integer petTypeId) {
         List<Pet> pets = petRepository.findByPetTypeId(petTypeId);
-        return pets.stream().map(pet -> mapingDTO(pet)).collect(Collectors.toList());
+        return pets.stream().map(pet -> mappingDTO(pet)).collect(Collectors.toList());
     }
 
     @Override
     public List<PetDTO> showPetsByType(String petType) {
         List<Pet> pets = petRepository.findByPetType(petType);
-        return pets.stream().map(pet -> mapingDTO(pet)).collect(Collectors.toList());
+        return pets.stream().map(pet -> mappingDTO(pet)).collect(Collectors.toList());
     }
 
     @Override
@@ -89,7 +69,7 @@ public class PetServiceImp implements PetService {
             throw new AppException(HttpStatus.BAD_REQUEST, "Esta mascota no existe!");
         }
 
-        return mapingDTO(pet);
+        return mappingDTO(pet);
     }
 
     @Override
@@ -108,7 +88,7 @@ public class PetServiceImp implements PetService {
 
         Pet newPet = petRepository.save(pet);
 
-        return mapingDTO(newPet);
+        return mappingDTO(newPet);
     }
 
     @Override
@@ -122,4 +102,15 @@ public class PetServiceImp implements PetService {
 
         petRepository.delete(pet);
     }
+
+    private Pet mappingEntity(PetDTO petDTO){
+        Pet pet = modelMapper.map(petDTO, Pet.class);
+        return pet;
+    }
+
+    private PetDTO mappingDTO(Pet pet){
+        PetDTO petDTO = modelMapper.map(pet, PetDTO.class);
+        return petDTO;
+    }
+
 }

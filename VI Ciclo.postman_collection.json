@@ -65,6 +65,16 @@
 				{
 					"name": "BuscarUsuario",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkwODA1NTgsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiNzczNzkzZmItNzgyZi00ZDJkLWFjNTgtNDk4OGU4ZDI3MjYyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.J-nVkWhm9PVPn8QaNcFPJGO8l5OCLYzuHPsQaXPcBMU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -221,6 +231,16 @@
 				{
 					"name": "BuscarEstado",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkwODA1NTgsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiNzczNzkzZmItNzgyZi00ZDJkLWFjNTgtNDk4OGU4ZDI3MjYyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.J-nVkWhm9PVPn8QaNcFPJGO8l5OCLYzuHPsQaXPcBMU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -520,6 +540,16 @@
 				{
 					"name": "BuscarTipoDeServicio",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkwODA1NTgsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiNzczNzkzZmItNzgyZi00ZDJkLWFjNTgtNDk4OGU4ZDI3MjYyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.J-nVkWhm9PVPn8QaNcFPJGO8l5OCLYzuHPsQaXPcBMU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -662,6 +692,16 @@
 				{
 					"name": "BuscarTipoDeMascota",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkwODA1NTgsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiNzczNzkzZmItNzgyZi00ZDJkLWFjNTgtNDk4OGU4ZDI3MjYyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.J-nVkWhm9PVPn8QaNcFPJGO8l5OCLYzuHPsQaXPcBMU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1191,6 +1231,16 @@
 				{
 					"name": "BuscarMascota",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkwODA1NTgsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiNzczNzkzZmItNzgyZi00ZDJkLWFjNTgtNDk4OGU4ZDI3MjYyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.J-nVkWhm9PVPn8QaNcFPJGO8l5OCLYzuHPsQaXPcBMU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1623,6 +1673,62 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Oauth2",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "oscar",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "oscar@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/petit/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"petit",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

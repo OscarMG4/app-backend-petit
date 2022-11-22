@@ -5,6 +5,7 @@ import idat.edu.pe.apiPetit.Entity.State;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.StateRepository;
 import idat.edu.pe.apiPetit.Service.StateService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,25 +15,9 @@ import java.util.stream.Collectors;
 public class StateServiceImp implements StateService {
 
     @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
     private StateRepository stateRepository;
-
-    private StateDTO mappingDTO(State state){
-        StateDTO stateDTO = new StateDTO();
-
-        stateDTO.setId(state.getIdState());
-        stateDTO.setState(state.getState());
-
-        return stateDTO;
-    }
-
-    private State mappingEntity(StateDTO stateDTO){
-        State state = new State();
-
-        state.setIdState(stateDTO.getId());
-        state.setState(stateDTO.getState());
-
-        return state;
-    }
 
     @Override
     public StateDTO createState(StateDTO stateDTO) {
@@ -70,5 +55,15 @@ public class StateServiceImp implements StateService {
     public void deleteState(Integer id) {
         State stateId = stateRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("State", "id", id));
         stateRepository.delete(stateId);
+    }
+
+    private StateDTO mappingDTO(State state){
+        StateDTO stateDTO = modelMapper.map(state, StateDTO.class);
+        return stateDTO;
+    }
+
+    private State mappingEntity(StateDTO stateDTO){
+        State state = modelMapper.map(stateDTO, State.class);
+        return state;
     }
 }

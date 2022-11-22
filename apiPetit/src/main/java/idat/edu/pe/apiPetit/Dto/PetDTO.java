@@ -1,11 +1,16 @@
 package idat.edu.pe.apiPetit.Dto;
 
+import idat.edu.pe.apiPetit.Entity.Adoption;
+
+import java.util.List;
+
 public class PetDTO {
     private Integer id;
     private String name;
     private String sex;
     private String race;
     private String age;
+    private List<Adoption> adoptions;
 
     public PetDTO() {
     }
@@ -56,5 +61,13 @@ public class PetDTO {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public List<Adoption> getAdoptions() {
+        return adoptions;
+    }
+
+    public void setAdoptions(List<Adoption> adoptions) {
+        this.adoptions = adoptions;
     }
 }

@@ -1,5 +1,8 @@
 package idat.edu.pe.apiPetit.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public class Pet {
     @Column(name = "age", nullable = false, length = 10)
     @NotBlank
     private String age;
+    @JsonBackReference
     @OneToMany(mappedBy = "pet", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Adoption> adoptions = new ArrayList<>();
     @ManyToOne

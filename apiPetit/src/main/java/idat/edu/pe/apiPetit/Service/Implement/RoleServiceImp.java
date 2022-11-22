@@ -8,6 +8,7 @@ import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.AccountRepository;
 import idat.edu.pe.apiPetit.Repository.RoleRepository;
 import idat.edu.pe.apiPetit.Service.RoleService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,28 +20,12 @@ import java.util.stream.Collectors;
 public class RoleServiceImp implements RoleService {
 
     @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
     private AccountRepository accountRepository;
-
-    private RoleDTO mappingDTO(Role role){
-        RoleDTO roleDTO = new RoleDTO();
-
-        roleDTO.setId(role.getIdRole());
-        roleDTO.setRole(role.getRole());
-
-        return roleDTO;
-    }
-
-    private Role mappingEntity(RoleDTO roleDTO){
-        Role role = new Role();
-
-        role.setIdRole(roleDTO.getId());
-        role.setRole(roleDTO.getRole());
-
-        return role;
-    }
 
     @Override
     public RoleDTO createRole(Integer accountId, RoleDTO roleDTO) {
@@ -103,4 +88,15 @@ public class RoleServiceImp implements RoleService {
 
         roleRepository.delete(role);
     }
+
+    private RoleDTO mappingDTO(Role role){
+        RoleDTO roleDTO = modelMapper.map(role, RoleDTO.class);
+        return roleDTO;
+    }
+
+    private Role mappingEntity(RoleDTO roleDTO){
+        Role role = modelMapper.map(roleDTO, Role.class);
+        return role;
+    }
+
 }

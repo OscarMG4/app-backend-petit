@@ -1,5 +1,7 @@
 package idat.edu.pe.apiPetit.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class PetType {
     private Integer idPetType;
     @Column(name = "pet_type", nullable = false, unique = true)
     private String petType;
+    @JsonBackReference
     @OneToMany(mappedBy = "petType", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Pet> pets = new ArrayList<>();
     public PetType() {

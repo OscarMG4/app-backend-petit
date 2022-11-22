@@ -5,6 +5,7 @@ import idat.edu.pe.apiPetit.Entity.PetType;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.PetTypeRepository;
 import idat.edu.pe.apiPetit.Service.PetTypeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +16,11 @@ import java.util.stream.Collectors;
 public class PetTypeServiceImp implements PetTypeService {
 
     @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     private PetTypeRepository petTypeRepository;
 
-    private PetTypeDTO mappingDTO(PetType petType){
-        PetTypeDTO petTypeDTO = new PetTypeDTO();
-
-        petTypeDTO.setId(petType.getIdPetType());
-        petTypeDTO.setPetType(petType.getPetType());
-
-        return petTypeDTO;
-    }
-
-    private PetType mappingEntity(PetTypeDTO petTypeDTO){
-        PetType petType = new PetType();
-
-        petType.setIdPetType(petTypeDTO.getId());
-        petType.setPetType(petTypeDTO.getPetType());
-
-        return petType;
-    }
 
     @Override
     public PetTypeDTO createTypeService(PetTypeDTO petTypeDTO) {
@@ -70,4 +57,15 @@ public class PetTypeServiceImp implements PetTypeService {
         PetType petTypeId = petTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("PetType", "id", id));
         petTypeRepository.delete(petTypeId);
     }
+
+    private PetTypeDTO mappingDTO(PetType petType){
+        PetTypeDTO petTypeDTO = modelMapper.map(petType, PetTypeDTO.class);
+        return petTypeDTO;
+    }
+
+    private PetType mappingEntity(PetTypeDTO petTypeDTO){
+        PetType petType = modelMapper.map(petTypeDTO, PetType.class);
+        return petType;
+    }
+
 }
