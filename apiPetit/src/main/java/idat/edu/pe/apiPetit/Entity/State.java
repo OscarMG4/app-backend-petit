@@ -16,10 +16,8 @@ public class State {
     @Column(name = "state", nullable = false, length = 15, unique = true)
     @NotBlank
     private String state;
-    @JsonBackReference
     @OneToMany(mappedBy = "state", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Quote> quotes = new ArrayList<>();
-    @JsonBackReference
     @OneToMany(mappedBy = "state", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Adoption> adoptions  = new ArrayList<>();
 

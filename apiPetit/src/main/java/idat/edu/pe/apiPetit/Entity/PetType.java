@@ -14,7 +14,6 @@ public class PetType {
     private Integer idPetType;
     @Column(name = "pet_type", nullable = false, unique = true)
     private String petType;
-    @JsonBackReference
     @OneToMany(mappedBy = "petType", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Pet> pets = new ArrayList<>();
     public PetType() {

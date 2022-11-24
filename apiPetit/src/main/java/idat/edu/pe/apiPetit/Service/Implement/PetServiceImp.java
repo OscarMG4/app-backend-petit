@@ -85,6 +85,7 @@ public class PetServiceImp implements PetService {
         pet.setSex(petDTO.getSex());
         pet.setRace(petDTO.getRace());
         pet.setAge(petDTO.getAge());
+        pet.setPhoto(petDTO.getPhoto());
 
         Pet newPet = petRepository.save(pet);
 

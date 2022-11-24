@@ -10,17 +10,18 @@ public class PetDTO {
     private String sex;
     private String race;
     private String age;
-    private List<Adoption> adoptions;
+    private byte[] photo;
 
     public PetDTO() {
     }
 
-    public PetDTO(Integer id, String name, String sex, String race, String age) {
+    public PetDTO(Integer id, String name, String sex, String race, String age, byte[] photo) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.race = race;
         this.age = age;
+        this.photo = photo;
     }
 
     public Integer getId() {
@@ -63,11 +64,12 @@ public class PetDTO {
         this.age = age;
     }
 
-    public List<Adoption> getAdoptions() {
-        return adoptions;
+    public byte[] getPhoto() {
+        return photo;
     }
 
-    public void setAdoptions(List<Adoption> adoptions) {
-        this.adoptions = adoptions;
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
+
 }

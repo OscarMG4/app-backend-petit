@@ -1,12 +1,5 @@
 package idat.edu.pe.apiPetit.Dto;
 
-
-//import idat.edu.pe.apiPetit.Entity.Account;
-//import idat.edu.pe.apiPetit.Entity.Adoption;
-//import idat.edu.pe.apiPetit.Entity.Quote;
-
-//import java.util.List;
-
 public class UserDTO {
 
     private Integer id;
@@ -15,8 +8,6 @@ public class UserDTO {
     private String dni;
     private String phone;
     private byte[] photo;
-	//private List<Adoption> adoptions;
-	//private List<Quote> quotes;
     
 	public UserDTO() {
 	}
@@ -78,20 +69,4 @@ public class UserDTO {
 		this.photo = photo;
 	}
 
-
-/*	public List<Adoption> getAdoptions() {
-		return adoptions;
-	}
-
-	public void setAdoptions(List<Adoption> adoptions) {
-		this.adoptions = adoptions;
-	}
-
-	public List<Quote> getQuotes() {
-		return quotes;
-	}
-
-	public void setQuotes(List<Quote> quotes) {
-		this.quotes = quotes;
-	}*/
 }

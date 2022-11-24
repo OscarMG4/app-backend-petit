@@ -28,13 +28,10 @@ public class User {
     private String phone;
     @Column(name = "photo", nullable = false, length = 100000)
     private byte[] photo;
-	@JsonBackReference
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
 	private List<Account> accounts = new ArrayList<>();
-	@JsonBackReference
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
 	private List<Adoption> adoptions = new ArrayList<>();
-	@JsonBackReference
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
 	private List<Quote> quotes = new ArrayList<>();
 

@@ -2,6 +2,7 @@ package idat.edu.pe.apiPetit.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -26,7 +27,8 @@ public class Pet {
     @Column(name = "age", nullable = false, length = 10)
     @NotBlank
     private String age;
-    @JsonBackReference
+    @Column(name = "photo", nullable = false, length = 100000)
+    private byte[] photo;
     @OneToMany(mappedBy = "pet", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Adoption> adoptions = new ArrayList<>();
     @ManyToOne
@@ -39,12 +41,13 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(Integer idPet, String name, String sex, String race, String age, List<Adoption> adoptions, PetType petType) {
+    public Pet(Integer idPet, String name, String sex, String race, String age, byte[] photo, List<Adoption> adoptions, PetType petType) {
         this.idPet = idPet;
         this.name = name;
         this.sex = sex;
         this.race = race;
         this.age = age;
+        this.photo = photo;
         this.adoptions = adoptions;
         this.petType = petType;
     }
@@ -71,6 +74,14 @@ public class Pet {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     public List<Adoption> getAdoptions() {

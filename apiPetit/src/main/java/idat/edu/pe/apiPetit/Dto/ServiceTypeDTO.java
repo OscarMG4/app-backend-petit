@@ -8,7 +8,6 @@ public class ServiceTypeDTO {
 
     private Integer id;
     private String serviceType;
-    private List<Quote> quotes;
     public ServiceTypeDTO() {
     }
 
@@ -33,11 +32,4 @@ public class ServiceTypeDTO {
         this.serviceType = serviceType;
     }
 
-    public List<Quote> getQuotes() {
-        return quotes;
-    }
-
-    public void setQuotes(List<Quote> quotes) {
-        this.quotes = quotes;
-    }
 }

@@ -18,7 +18,6 @@ public class ServiceType {
     @Column(name = "service_type", nullable = false, length = 20, unique = true)
     @NotBlank
     private String serviceType;
-    @JsonBackReference
     @OneToMany(mappedBy = "serviceType", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.EAGER)
     private List<Quote> quotes = new ArrayList<>();
 
