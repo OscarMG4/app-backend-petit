@@ -1,12 +1,10 @@
 package idat.edu.pe.apiPetit.Dto;
 
-import idat.edu.pe.apiPetit.Entity.Adoption;
-import idat.edu.pe.apiPetit.Entity.Quote;
-
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
 
 public class StateDTO {
     private Integer id;
+    @NotEmpty(message = "El campo estado es obligatorio!")
     private String state;
 
     public StateDTO() {

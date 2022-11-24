@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class PetRestController {
     private PetService petService;
 
     @RequestMapping(path = "/pets/{idTypePet}/create", method = RequestMethod.POST)
-    public ResponseEntity<PetDTO> savePet(@PathVariable(name = "idTypePet") Integer idTypePet, @RequestBody PetDTO petDTO){
+    public ResponseEntity<PetDTO> savePet(@PathVariable(name = "idTypePet") Integer idTypePet, @Valid @RequestBody PetDTO petDTO){
         return new ResponseEntity<>(petService.createPet(idTypePet, petDTO), HttpStatus.CREATED);
     }
 
@@ -42,7 +43,7 @@ public class PetRestController {
     }
 
     @RequestMapping(path = "/pets/{petTypeId}/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<PetDTO> updatePet(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id, @RequestBody PetDTO petDTO){
+    public ResponseEntity<PetDTO> updatePet(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id, @Valid @RequestBody PetDTO petDTO){
         PetDTO petResponse = petService.updatePet(petDTO, id, petTypeId);
         return new ResponseEntity<>(petResponse, HttpStatus.OK);
     }

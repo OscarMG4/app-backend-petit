@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class QuoteRestController {
     private QuoteService quoteService;
 
     @RequestMapping(path = "/users/{serviceTypeId}/{userId}/{stateId}/createQuote", method = RequestMethod.POST)
-    public ResponseEntity<QuoteDTO> saveQuote(@PathVariable(name = "serviceTypeId") Integer serviceTypeId, @PathVariable(name = "userId") Integer userId, @PathVariable(name = "stateId") Integer stateId, @RequestBody QuoteDTO quoteDTO){
+    public ResponseEntity<QuoteDTO> saveQuote(@PathVariable(name = "serviceTypeId") Integer serviceTypeId, @PathVariable(name = "userId") Integer userId, @PathVariable(name = "stateId") Integer stateId, @Valid @RequestBody QuoteDTO quoteDTO){
         return new ResponseEntity<>(quoteService.createQuote(serviceTypeId, userId, stateId, quoteDTO), HttpStatus.CREATED);
     }
 
@@ -44,7 +45,7 @@ public class QuoteRestController {
     }
 
     @RequestMapping(path = "/users/{userId}/listQuotes/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<QuoteDTO> updateQuotes(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer quoteId, @RequestBody QuoteDTO quoteDTO){
+    public ResponseEntity<QuoteDTO> updateQuotes(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer quoteId, @Valid @RequestBody QuoteDTO quoteDTO){
         return new ResponseEntity<>(quoteService.updateQuote(userId, quoteId, quoteDTO), HttpStatus.OK);
     }
 

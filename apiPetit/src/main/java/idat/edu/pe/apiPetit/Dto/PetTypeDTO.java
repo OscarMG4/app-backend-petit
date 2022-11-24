@@ -1,11 +1,10 @@
 package idat.edu.pe.apiPetit.Dto;
 
-import idat.edu.pe.apiPetit.Entity.Pet;
-
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
 
 public class PetTypeDTO {
     private Integer id;
+    @NotEmpty(message = "El campo tipo de mascota es obligatorio!")
     private String petType;
 
     public PetTypeDTO() {

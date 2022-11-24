@@ -1,7 +1,10 @@
 package idat.edu.pe.apiPetit.Dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AccountTypeDTO {
     private Integer id;
+    @NotEmpty(message = "El campo tipo de cuenta es obligatorio!")
     private String accountType;
 
     public AccountTypeDTO() {

@@ -1,7 +1,10 @@
 package idat.edu.pe.apiPetit.Dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AdoptionDTO {
     private Integer id;
+    @NotEmpty(message = "El campo descripción es obligatorio!")
     private String description;
 
     public AdoptionDTO() {

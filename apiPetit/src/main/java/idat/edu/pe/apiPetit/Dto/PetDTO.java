@@ -2,13 +2,18 @@ package idat.edu.pe.apiPetit.Dto;
 
 import idat.edu.pe.apiPetit.Entity.Adoption;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 public class PetDTO {
     private Integer id;
+    @NotEmpty(message = "El campo nombre es obligatorio!")
     private String name;
+    @NotEmpty(message = "El campo sexo es obligatorio!")
     private String sex;
+    @NotEmpty(message = "El campo raza es obligatorio!")
     private String race;
+    @NotEmpty(message = "El campo edad es obligatorio!")
     private String age;
     private byte[] photo;
 

@@ -1,8 +1,11 @@
 package idat.edu.pe.apiPetit.Dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class RoleDTO {
 
     private Integer id;
+    @NotEmpty(message = "El campo rol es obligatorio!")
     private String role;
 
     public RoleDTO() {

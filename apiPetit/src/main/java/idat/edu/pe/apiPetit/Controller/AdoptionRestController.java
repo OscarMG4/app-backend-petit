@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class AdoptionRestController {
     private AdoptionService adoptionService;
 
     @RequestMapping(path = "/users/{userId}/{stateId}/{petId}/createAdoption", method = RequestMethod.POST)
-    public ResponseEntity<AdoptionDTO> saveAdoption(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "stateId") Integer stateId, @PathVariable(name = "petId") Integer petId, @RequestBody AdoptionDTO adoptionDTO){
+    public ResponseEntity<AdoptionDTO> saveAdoption(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "stateId") Integer stateId, @PathVariable(name = "petId") Integer petId, @Valid @RequestBody AdoptionDTO adoptionDTO){
         return new ResponseEntity<>(adoptionService.createAdoption(userId, stateId, petId, adoptionDTO), HttpStatus.CREATED);
     }
 
@@ -37,7 +38,7 @@ public class AdoptionRestController {
     }
 
     @RequestMapping(path = "/users/{userId}/listAdoptions/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<AdoptionDTO> updateQuotes(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer adoptionId, @RequestBody AdoptionDTO adoptionDTO){
+    public ResponseEntity<AdoptionDTO> updateQuotes(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer adoptionId, @Valid @RequestBody AdoptionDTO adoptionDTO){
         return new ResponseEntity<>(adoptionService.updateAdoption(userId, adoptionId, adoptionDTO), HttpStatus.OK);
     }
 

@@ -1,11 +1,17 @@
 package idat.edu.pe.apiPetit.Dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class UserDTO {
 
-    private Integer id;
+	private Integer id;
+	@NotEmpty(message = "El campo nombres es obligatorio!")
     private String names;
+	@NotEmpty(message = "El campo apellidos es obligatorio!")
     private String lastNames;
+	@NotEmpty(message = "El campo dni es obligatorio!")
     private String dni;
+	@NotEmpty(message = "El campo celular es obligatorio!")
     private String phone;
     private byte[] photo;
     

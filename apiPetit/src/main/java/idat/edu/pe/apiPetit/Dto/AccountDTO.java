@@ -1,8 +1,14 @@
 package idat.edu.pe.apiPetit.Dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 public class AccountDTO {
     private Integer id;
+    @NotEmpty(message = "El campo email es obligatorio!")
+    @Email
     private String email;
+    @NotEmpty(message = "El campo contraseña es obligatorio!")
     private String pass;
 
     public AccountDTO() {

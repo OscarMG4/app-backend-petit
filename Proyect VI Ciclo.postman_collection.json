@@ -12,11 +12,21 @@
 				{
 					"name": "CrearUsuario",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkyNjcwNDYsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiZWZhOTYwODctYTBkYi00OTY1LWIzZmItNzJiN2E1M2E1NmEyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.8ofvcBusVmetvFZJpd8Yui4uXcBfwX3Hd4rX4Efx81M",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"names\": \"Oscar Fernando\",\r\n    \"lastNames\": \"Muñoz Gayoso\",\r\n    \"dni\": \"74888178\",\r\n    \"phone\": \"981692345\",\r\n    \"photo\": [49,48,58,50,52,58,50,54]\r\n}",
+							"raw": "{\r\n    \"names\": \"Edson David\",\r\n    \"lastNames\": \"Cabrejos Moreno\",\r\n    \"dni\": \"74388178\",\r\n    \"phone\": \"981692145\",\r\n    \"photo\": [49,48,58,50,52,51,50,54]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1123,11 +1133,21 @@
 				{
 					"name": "CrearMascota",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkyNzI1NTksInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiYmI5ZDgwNGQtODhjNi00MGQ4LTg5ZGUtNjIxN2RkYWQ5NWNiIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.ilHTdXDX96z4o16Q2ggmmXxt7fRT81y7cW8GkzIlhi8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Gringo\",\r\n    \"sex\": \"Macho\",\r\n    \"race\": \"Mestizo\",\r\n    \"age\": \"1 año\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Lasi\",\r\n    \"sex\": \"Hembra\",\r\n    \"race\": \"Mestizo\",\r\n    \"age\": \"3 años\",\r\n    \"photo\": [49,48,58,50,12,58,30,54]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1135,7 +1155,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/petit/api/pets/2/create",
+							"raw": "http://localhost:8080/petit/api/pets/1/create",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1145,7 +1165,7 @@
 								"petit",
 								"api",
 								"pets",
-								"2",
+								"1",
 								"create"
 							]
 						}
@@ -1155,6 +1175,16 @@
 				{
 					"name": "ListarMascotas",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkyNjcwNDYsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiZWZhOTYwODctYTBkYi00OTY1LWIzZmItNzJiN2E1M2E1NmEyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.8ofvcBusVmetvFZJpd8Yui4uXcBfwX3Hd4rX4Efx81M",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1509,6 +1539,16 @@
 				{
 					"name": "CrearSolicitudAdopcion",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkyNjcwNDYsInVzZXJfbmFtZSI6Im9zY2FyQGdtYWlsLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiZWZhOTYwODctYTBkYi00OTY1LWIzZmItNzJiN2E1M2E1NmEyIiwiY2xpZW50X2lkIjoib3NjYXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.8ofvcBusVmetvFZJpd8Yui4uXcBfwX3Hd4rX4Efx81M",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {

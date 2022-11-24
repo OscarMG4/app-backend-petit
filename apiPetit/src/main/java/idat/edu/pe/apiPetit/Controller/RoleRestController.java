@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class RoleRestController {
     private RoleService roleService;
 
     @RequestMapping(path = "/accounts/{accountId}/createRole", method = RequestMethod.POST)
-    public ResponseEntity<RoleDTO> saveRole(@PathVariable(name = "accountId") Integer accountId, @RequestBody RoleDTO roleDTO){
+    public ResponseEntity<RoleDTO> saveRole(@PathVariable(name = "accountId") Integer accountId, @Valid @RequestBody RoleDTO roleDTO){
         return new ResponseEntity<>(roleService.createRole(accountId, roleDTO), HttpStatus.CREATED);
     }
 
@@ -37,7 +38,7 @@ public class RoleRestController {
     }
 
     @RequestMapping(path = "/accounts/{accountId}/listRoles/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<RoleDTO> updateRole(@PathVariable(name = "accountId") Integer accountId, @RequestBody RoleDTO roleDTO, @PathVariable(name = "id") Integer id){
+    public ResponseEntity<RoleDTO> updateRole(@PathVariable(name = "accountId") Integer accountId, @Valid @RequestBody RoleDTO roleDTO, @PathVariable(name = "id") Integer id){
         RoleDTO roleResponse = roleService.updateRole(accountId, roleDTO, id);
         return new ResponseEntity<>(roleResponse, HttpStatus.OK);
     }
