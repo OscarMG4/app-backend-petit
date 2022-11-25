@@ -1,7 +1,6 @@
 package idat.edu.pe.apiPetit.Controller;
 
 import idat.edu.pe.apiPetit.Dto.AccountTypeDTO;
-import idat.edu.pe.apiPetit.Dto.PetDTO;
 import idat.edu.pe.apiPetit.Service.AccountTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

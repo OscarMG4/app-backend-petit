@@ -1,7 +1,6 @@
 package idat.edu.pe.apiPetit.Service;
 
 import idat.edu.pe.apiPetit.Dto.ServiceTypeDTO;
-import idat.edu.pe.apiPetit.Dto.StateDTO;
 
 import java.util.List;
 

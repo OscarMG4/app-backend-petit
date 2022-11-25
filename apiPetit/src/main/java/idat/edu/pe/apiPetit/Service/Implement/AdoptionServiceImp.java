@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AdoptionSeviceImp implements AdoptionService {
+public class AdoptionServiceImp implements AdoptionService {
 
     @Autowired
     private ModelMapper modelMapper;
