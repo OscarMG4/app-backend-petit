@@ -1,9 +1,6 @@
 package idat.edu.pe.apiPetit.Dto;
 
-import idat.edu.pe.apiPetit.Entity.Adoption;
-
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 public class PetDTO {
     private Integer id;
