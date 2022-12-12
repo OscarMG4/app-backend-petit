@@ -263,7 +263,8 @@ public class QuoteServiceImp implements QuoteService {
                 for (int i = 0; i < 32; i++) {
                     if (day == 32) {
                         day = 1;
-                        month++;
+                        month = 1;
+                        year++;
                         dates.add(LocalDate.of(year, month, day));
                         day++;
                     } else {

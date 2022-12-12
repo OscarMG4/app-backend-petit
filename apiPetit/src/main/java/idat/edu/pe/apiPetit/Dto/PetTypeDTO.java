@@ -13,7 +13,7 @@ public class PetTypeDTO {
     public PetTypeDTO(Integer id, String petType) {
         this.id = id;
         this.petType = petType;
-        
+
     }
 
     public Integer getId() {
