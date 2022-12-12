@@ -1,13 +1,13 @@
 package idat.edu.pe.apiPetit.Controller;
 
 import idat.edu.pe.apiPetit.Dto.QuoteDTO;
+import idat.edu.pe.apiPetit.Dto.QuoteResponseDTO;
 import idat.edu.pe.apiPetit.Service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class QuoteRestController {
     private QuoteService quoteService;
 
     @RequestMapping(path = "/users/{serviceTypeId}/{userId}/{stateId}/createQuote", method = RequestMethod.POST)
-    public ResponseEntity<QuoteDTO> saveQuote(@PathVariable(name = "serviceTypeId") Integer serviceTypeId, @PathVariable(name = "userId") Integer userId, @PathVariable(name = "stateId") Integer stateId, @Valid @RequestBody QuoteDTO quoteDTO){
+    public ResponseEntity<QuoteDTO> saveQuote(@PathVariable(name = "serviceTypeId") Integer serviceTypeId, @PathVariable(name = "userId") Integer userId, @PathVariable(name = "stateId") Integer stateId, @RequestBody QuoteDTO quoteDTO){
         return new ResponseEntity<>(quoteService.createQuote(serviceTypeId, userId, stateId, quoteDTO), HttpStatus.CREATED);
     }
 
@@ -30,8 +30,8 @@ public class QuoteRestController {
 
 
     @RequestMapping(path = "/users/{userId}/listQuotes", method = RequestMethod.GET)
-    public List<QuoteDTO> showQuotesByUser(@PathVariable(name = "userId") Integer userId){
-        return quoteService.showQuoteByUserId(userId);
+    public List<QuoteResponseDTO> showQuotesByUser(@PathVariable(name = "userId") Integer userId){
+        return quoteService.showAllQuotesByUserId(userId);
     }
 
     @RequestMapping(path = "/countQuotes", method = RequestMethod.GET)
@@ -45,7 +45,7 @@ public class QuoteRestController {
     }
 
     @RequestMapping(path = "/users/{userId}/listQuotes/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<QuoteDTO> updateQuotes(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer quoteId, @Valid @RequestBody QuoteDTO quoteDTO){
+    public ResponseEntity<QuoteDTO> updateQuotes(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer quoteId, @RequestBody QuoteDTO quoteDTO){
         return new ResponseEntity<>(quoteService.updateQuote(userId, quoteId, quoteDTO), HttpStatus.OK);
     }
 

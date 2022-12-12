@@ -1,11 +1,13 @@
 package idat.edu.pe.apiPetit.Dto;
 
-import javax.validation.constraints.NotEmpty;
+import idat.edu.pe.apiPetit.Entity.Pet;
+
+import java.util.List;
 
 public class PetTypeDTO {
     private Integer id;
-    @NotEmpty(message = "El campo tipo de mascota es obligatorio!")
     private String petType;
+//    private List<Pet> pets;
 
     public PetTypeDTO() {
     }
@@ -13,7 +15,6 @@ public class PetTypeDTO {
     public PetTypeDTO(Integer id, String petType) {
         this.id = id;
         this.petType = petType;
-
     }
 
     public Integer getId() {
@@ -31,5 +32,12 @@ public class PetTypeDTO {
     public void setPetType(String petType) {
         this.petType = petType;
     }
-
+//
+//    public List<Pet> getPets() {
+//        return pets;
+//    }
+//
+//    public void setPets(List<Pet> pets) {
+//        this.pets = pets;
+//    }
 }

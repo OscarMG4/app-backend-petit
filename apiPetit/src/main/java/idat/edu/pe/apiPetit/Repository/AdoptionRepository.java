@@ -1,5 +1,6 @@
 package idat.edu.pe.apiPetit.Repository;
 
+import idat.edu.pe.apiPetit.Dto.UbicacionDTO;
 import idat.edu.pe.apiPetit.Entity.Adoption;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,9 @@ public interface AdoptionRepository extends JpaRepository<Adoption, Integer> {
             "where a.id_user like %:idUser%", nativeQuery = true)
     List<Adoption> findByIdUser(@Param("idUser") Integer idUser);
 
+
+//    List<UbicacionDTO> obtenerEntregas(@Param("idState") Integer idState);
+
+    @Query(value = "select * from adoptions as a where a.id_state like %:idState%", nativeQuery = true)
+    List<Adoption> findByIdState(Integer idState);
 }

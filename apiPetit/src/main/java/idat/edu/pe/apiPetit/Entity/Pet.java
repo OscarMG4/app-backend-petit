@@ -1,5 +1,8 @@
 package idat.edu.pe.apiPetit.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -23,8 +26,10 @@ public class Pet {
     @Column(name = "age", nullable = false, length = 10)
     @NotBlank
     private String age;
-    @Column(name = "photo", nullable = false, length = 100000)
-    private byte[] photo;
+    @Column(name = "photo", nullable = false, length = 500)
+    @NotBlank
+    private String photo;
+//    @JsonBackReference
     @OneToMany(mappedBy = "pet", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Adoption> adoptions = new ArrayList<>();
     @ManyToOne
@@ -37,7 +42,7 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(Integer idPet, String name, String sex, String race, String age, byte[] photo, List<Adoption> adoptions, PetType petType) {
+    public Pet(Integer idPet, String name, String sex, String race, String age, String photo, List<Adoption> adoptions, PetType petType) {
         this.idPet = idPet;
         this.name = name;
         this.sex = sex;
@@ -72,14 +77,6 @@ public class Pet {
         this.sex = sex;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public List<Adoption> getAdoptions() {
         return adoptions;
     }
@@ -102,6 +99,14 @@ public class Pet {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public PetType getPetType() {

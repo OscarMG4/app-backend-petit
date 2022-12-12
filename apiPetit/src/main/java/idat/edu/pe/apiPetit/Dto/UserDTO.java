@@ -1,19 +1,22 @@
 package idat.edu.pe.apiPetit.Dto;
 
-import javax.validation.constraints.NotEmpty;
+
+import idat.edu.pe.apiPetit.Entity.Account;
+import idat.edu.pe.apiPetit.Entity.Adoption;
+import idat.edu.pe.apiPetit.Entity.Quote;
+
+import java.util.List;
 
 public class UserDTO {
 
-	private Integer id;
-	@NotEmpty(message = "El campo nombres es obligatorio!")
+    private Integer id;
     private String names;
-	@NotEmpty(message = "El campo apellidos es obligatorio!")
     private String lastNames;
-	@NotEmpty(message = "El campo dni es obligatorio!")
     private String dni;
-	@NotEmpty(message = "El campo celular es obligatorio!")
     private String phone;
     private byte[] photo;
+//	private List<Adoption> adoptions;
+//	private List<Quote> quotes;
     
 	public UserDTO() {
 	}
@@ -75,4 +78,20 @@ public class UserDTO {
 		this.photo = photo;
 	}
 
+
+//	public List<Adoption> getAdoptions() {
+//		return adoptions;
+//	}
+//
+//	public void setAdoptions(List<Adoption> adoptions) {
+//		this.adoptions = adoptions;
+//	}
+//
+//	public List<Quote> getQuotes() {
+//		return quotes;
+//	}
+//
+//	public void setQuotes(List<Quote> quotes) {
+//		this.quotes = quotes;
+//	}
 }

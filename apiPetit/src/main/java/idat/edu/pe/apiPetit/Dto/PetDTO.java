@@ -1,23 +1,22 @@
 package idat.edu.pe.apiPetit.Dto;
 
-import javax.validation.constraints.NotEmpty;
+import idat.edu.pe.apiPetit.Entity.Adoption;
+
+import java.util.List;
 
 public class PetDTO {
     private Integer id;
-    @NotEmpty(message = "El campo nombre es obligatorio!")
     private String name;
-    @NotEmpty(message = "El campo sexo es obligatorio!")
     private String sex;
-    @NotEmpty(message = "El campo raza es obligatorio!")
     private String race;
-    @NotEmpty(message = "El campo edad es obligatorio!")
     private String age;
-    private byte[] photo;
+    private String photo;
+//    private List<Adoption> adoptions;
 
     public PetDTO() {
     }
 
-    public PetDTO(Integer id, String name, String sex, String race, String age, byte[] photo) {
+    public PetDTO(Integer id, String name, String sex, String race, String age, String photo) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -66,12 +65,19 @@ public class PetDTO {
         this.age = age;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
+//    public List<Adoption> getAdoptions() {
+//        return adoptions;
+//    }
+//
+//    public void setAdoptions(List<Adoption> adoptions) {
+//        this.adoptions = adoptions;
+//    }
 }

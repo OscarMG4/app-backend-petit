@@ -16,4 +16,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             "where a.email like %:email%", nativeQuery = true)
     List<User> findByEmail(@Param("email") String email);
 
+    @Query(value = "select u from User u where u.dni=?1")
+    User findByDni(String dni);
+
+    User findByPhone(String phone);
+
 }

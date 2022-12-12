@@ -1,13 +1,13 @@
 package idat.edu.pe.apiPetit.Controller;
 
 import idat.edu.pe.apiPetit.Dto.AccountTypeDTO;
+import idat.edu.pe.apiPetit.Dto.PetDTO;
 import idat.edu.pe.apiPetit.Service.AccountTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +18,7 @@ public class AccountTypeRestController {
     private AccountTypeService accountTypeService;
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public ResponseEntity<AccountTypeDTO> saveAccountType(@Valid @RequestBody AccountTypeDTO accountTypeDTO){
+    public ResponseEntity<AccountTypeDTO> saveAccountType(@RequestBody AccountTypeDTO accountTypeDTO){
         return new ResponseEntity<>(accountTypeService.createAccountType(accountTypeDTO), HttpStatus.CREATED);
     }
 
@@ -33,7 +33,7 @@ public class AccountTypeRestController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<AccountTypeDTO> updateAccountType(@Valid @RequestBody AccountTypeDTO accountTypeDTO, @PathVariable(name = "id") Integer id){
+    public ResponseEntity<AccountTypeDTO> updateAccountType(@RequestBody AccountTypeDTO accountTypeDTO, @PathVariable(name = "id") Integer id){
         return new ResponseEntity<>(accountTypeService.updateAccountType(accountTypeDTO, id), HttpStatus.OK);
     }
 

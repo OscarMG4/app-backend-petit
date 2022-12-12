@@ -1,6 +1,7 @@
 package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.QuoteDTO;
+import idat.edu.pe.apiPetit.Dto.QuoteResponseDTO;
 import idat.edu.pe.apiPetit.Entity.Quote;
 import idat.edu.pe.apiPetit.Entity.ServiceType;
 import idat.edu.pe.apiPetit.Entity.State;
@@ -16,6 +17,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,8 +70,14 @@ public class QuoteServiceImp implements QuoteService {
 
     @Override
     public List<QuoteDTO> showQuoteByUserId(Integer userId) {
-        List<Quote> quotes = quoteRepository.findByUserId(userId);
+        List<Quote> quotes = quoteRepository.findAllByIdUser(userId);
         return quotes.stream().map(quote -> mappingDTO(quote)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QuoteResponseDTO> showAllQuotesByUserId(Integer idUser) {
+        List<Quote> quotes = quoteRepository.findAllByIdUser(idUser);
+        return quotes.stream().map(quote -> mappingDTO2(quote)).collect(Collectors.toList());
     }
 
     public boolean validateDate(LocalDate localDate) {
@@ -341,6 +350,11 @@ public class QuoteServiceImp implements QuoteService {
 
     private QuoteDTO mappingDTO(Quote quote){
         QuoteDTO quoteDTO = modelMapper.map(quote, QuoteDTO.class);
+        return quoteDTO;
+    }
+
+    private QuoteResponseDTO mappingDTO2(Quote quote){
+        QuoteResponseDTO quoteDTO = modelMapper.map(quote, QuoteResponseDTO.class);
         return quoteDTO;
     }
 }

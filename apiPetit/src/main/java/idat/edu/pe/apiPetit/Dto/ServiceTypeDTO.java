@@ -1,13 +1,14 @@
 package idat.edu.pe.apiPetit.Dto;
 
+import idat.edu.pe.apiPetit.Entity.Quote;
 
-import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 public class ServiceTypeDTO {
 
     private Integer id;
-    @NotEmpty(message = "El campo tipo de servicio es obligatorio!")
     private String serviceType;
+    private List<Quote> quotes;
     public ServiceTypeDTO() {
     }
 
@@ -32,4 +33,11 @@ public class ServiceTypeDTO {
         this.serviceType = serviceType;
     }
 
+    public List<Quote> getQuotes() {
+        return quotes;
+    }
+
+    public void setQuotes(List<Quote> quotes) {
+        this.quotes = quotes;
+    }
 }

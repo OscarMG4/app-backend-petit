@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +17,7 @@ public class ServiceTypeRestController {
     private ServiceTypeService serviceTypeService;
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public ResponseEntity<ServiceTypeDTO> saveServiceType(@Valid @RequestBody ServiceTypeDTO serviceTypeDTO){
+    public ResponseEntity<ServiceTypeDTO> saveServiceType(@RequestBody ServiceTypeDTO serviceTypeDTO){
         return new ResponseEntity<>(serviceTypeService.createServiceType(serviceTypeDTO), HttpStatus.CREATED);
     }
 
@@ -33,7 +32,7 @@ public class ServiceTypeRestController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<ServiceTypeDTO> updateServiceType(@Valid @RequestBody ServiceTypeDTO serviceTypeDTO, @PathVariable(name = "id") Integer id){
+    public ResponseEntity<ServiceTypeDTO> updateServiceType(@RequestBody ServiceTypeDTO serviceTypeDTO, @PathVariable(name = "id") Integer id){
         ServiceTypeDTO serviceTypeResponse = serviceTypeService.updateServiceType(serviceTypeDTO, id);
         return new ResponseEntity<>(serviceTypeResponse, HttpStatus.OK);
     }

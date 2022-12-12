@@ -1,6 +1,7 @@
 package idat.edu.pe.apiPetit.Service;
 
 import idat.edu.pe.apiPetit.Dto.QuoteDTO;
+import idat.edu.pe.apiPetit.Dto.QuoteResponseDTO;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
@@ -16,4 +17,6 @@ public interface QuoteService {
     QuoteDTO updateQuote(Integer userId, Integer quoteId, QuoteDTO quoteDTO);
     void deleteQuote(Integer userId, Integer quoteId);
 
+
+    List<QuoteResponseDTO> showAllQuotesByUserId(Integer idUser);
 }

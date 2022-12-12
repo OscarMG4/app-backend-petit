@@ -15,6 +15,8 @@ public interface UserService {
     UserDTO updateUser(UserDTO userDTO, Integer id);
     void deleteUser(Integer id);
 
+    UserDTO findByDni(String dni);
 
+    UserDTO findByPhone(String phone);
 
 }

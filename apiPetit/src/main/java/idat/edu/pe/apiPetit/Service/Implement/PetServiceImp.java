@@ -1,6 +1,7 @@
 package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.PetDTO;
+import idat.edu.pe.apiPetit.Dto.QuoteDTO;
 import idat.edu.pe.apiPetit.Entity.Pet;
 import idat.edu.pe.apiPetit.Entity.PetType;
 import idat.edu.pe.apiPetit.Exceptions.AppException;
@@ -60,13 +61,13 @@ public class PetServiceImp implements PetService {
     }
 
     @Override
-    public PetDTO showPetsId(Integer petTypeId, Integer id) {
-        PetType petType = petTypeRepository.findById(petTypeId).orElseThrow(()-> new ResourceNotFoundException("PetType", "id", petTypeId));
+    public PetDTO showPetsId(Integer id) {
+ //       PetType petType = petTypeRepository.findById(petTypeId).orElseThrow(()-> new ResourceNotFoundException("PetType", "id", petTypeId));
         Pet pet = petRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Pet", "id", id));
 
-        if (!pet.getPetType().getIdPetType().equals(petType.getIdPetType())){
-            throw new AppException(HttpStatus.BAD_REQUEST, "Esta mascota no existe!");
-        }
+//        if (!pet.getPetType().getIdPetType().equals(petType.getIdPetType())){
+//            throw new AppException(HttpStatus.BAD_REQUEST, "Esta mascota no existe!");
+//        }
 
         return mappingDTO(pet);
     }
@@ -84,7 +85,6 @@ public class PetServiceImp implements PetService {
         pet.setSex(petDTO.getSex());
         pet.setRace(petDTO.getRace());
         pet.setAge(petDTO.getAge());
-        pet.setPhoto(petDTO.getPhoto());
 
         Pet newPet = petRepository.save(pet);
 

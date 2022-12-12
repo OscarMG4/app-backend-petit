@@ -22,4 +22,6 @@ public interface QuoteRepository extends JpaRepository<Quote, Integer> {
     @Query(value = "select count(q.id_quote) from quotes q where q.date_attention like %:dateAttention%", nativeQuery = true)
     Integer countQuotesDates(@Param("dateAttention") LocalDate dateAttention);
 
+    @Query(value = "select * from quotes where id_user like :idUser", nativeQuery = true)
+    List<Quote> findAllByIdUser(Integer idUser);
 }

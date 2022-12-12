@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 
@@ -18,7 +17,7 @@ public class AccountRestController {
     private AccountService accountService;
 
     @RequestMapping(path = "/users/{accountTypeId}/{userId}/createAccount", method = RequestMethod.POST)
-    public ResponseEntity<AccountDTO> saveAccount(@PathVariable(name = "accountTypeId") Integer accountTypeId, @PathVariable(name = "userId") Integer userId, @Valid @RequestBody AccountDTO accountDTO){
+    public ResponseEntity<AccountDTO> saveAccount(@PathVariable(name = "accountTypeId") Integer accountTypeId, @PathVariable(name = "userId") Integer userId, @RequestBody AccountDTO accountDTO){
         return new ResponseEntity<>(accountService.createAccount(accountTypeId, userId, accountDTO), HttpStatus.CREATED);
     }
 
@@ -38,7 +37,7 @@ public class AccountRestController {
     }
 
     @RequestMapping(path = "/users/{userId}/listAccounts/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<AccountDTO> updateAccount(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer accountId, @Valid @RequestBody AccountDTO accountDTO){
+    public ResponseEntity<AccountDTO> updateAccount(@PathVariable(name = "userId") Integer userId, @PathVariable(name = "id") Integer accountId, @RequestBody AccountDTO accountDTO){
         return new ResponseEntity<>(accountService.updateAccount(userId, accountId, accountDTO), HttpStatus.OK);
     }
 

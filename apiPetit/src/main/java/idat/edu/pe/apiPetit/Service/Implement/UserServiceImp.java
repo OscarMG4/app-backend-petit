@@ -2,11 +2,13 @@ package idat.edu.pe.apiPetit.Service.Implement;
 
 import idat.edu.pe.apiPetit.Dto.UserDTO;
 import idat.edu.pe.apiPetit.Entity.User;
+import idat.edu.pe.apiPetit.Exceptions.AppException;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
 import idat.edu.pe.apiPetit.Service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,16 @@ public class UserServiceImp implements UserService {
     public UserDTO createUser(UserDTO userDTO) {
 
         User user = mappingEntity(userDTO);
+        UserDTO usuarioDb = findByDni(user.getDni());
+
+        if (usuarioDb != null)
+            throw new AppException(HttpStatus.BAD_REQUEST, "Ya existe un usuario con el dni " + user.getDni());
+
+        usuarioDb = findByPhone(user.getPhone());
+
+        if (usuarioDb != null)
+            throw new AppException(HttpStatus.BAD_REQUEST, "Ya existe un usuario con el telefono  " + user.getPhone());
+
         User newUser = userRepository.save(user);
         UserDTO userResponse = mappingDTO(newUser);
 
@@ -68,14 +80,28 @@ public class UserServiceImp implements UserService {
         userRepository.delete(userId);
     }
 
+    @Override
+    public UserDTO findByDni(String dni) {
+        User usuario = userRepository.findByDni(dni);
+        if (usuario == null) return null;
+        else return mappingDTO(usuario);
+    }
+
+    @Override
+    public UserDTO findByPhone(String phone) {
+        User usuario = userRepository.findByPhone(phone);
+        if (usuario == null) return null;
+        else return mappingDTO(usuario);
+    }
+
     //Convierte DTO a entidad
-    private User mappingEntity(UserDTO userDTO){
+    private User mappingEntity(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         return user;
     }
 
     //Convierte entidad a DTO
-    private UserDTO mappingDTO(User user){
+    private UserDTO mappingDTO(User user) {
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
         return userDTO;
     }

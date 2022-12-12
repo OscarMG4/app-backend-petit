@@ -1,6 +1,7 @@
 package idat.edu.pe.apiPetit.Service;
 
 import idat.edu.pe.apiPetit.Dto.AdoptionDTO;
+import idat.edu.pe.apiPetit.Dto.UbicacionDTO;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface AdoptionService {
     AdoptionDTO showAdoptionById(Integer idUser, Integer idAdoption);
     AdoptionDTO updateAdoption(Integer idUser, Integer idAdoption, AdoptionDTO adoptionDTO);
     void deleteAdoption(Integer idUser, Integer idAdoption);
-
+    List<UbicacionDTO> obtenerUbicaciones(Integer idState);
 }

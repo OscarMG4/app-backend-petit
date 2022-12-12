@@ -3,16 +3,19 @@ package idat.edu.pe.apiPetit.Service.Implement;
 import idat.edu.pe.apiPetit.Dto.AccountDTO;
 import idat.edu.pe.apiPetit.Entity.Account;
 import idat.edu.pe.apiPetit.Entity.AccountType;
+import idat.edu.pe.apiPetit.Entity.Role;
 import idat.edu.pe.apiPetit.Entity.User;
 import idat.edu.pe.apiPetit.Exceptions.AppException;
 import idat.edu.pe.apiPetit.Exceptions.ResourceNotFoundException;
 import idat.edu.pe.apiPetit.Repository.AccountRepository;
 import idat.edu.pe.apiPetit.Repository.AccountTypeRepository;
+import idat.edu.pe.apiPetit.Repository.RoleRepository;
 import idat.edu.pe.apiPetit.Repository.UserRepository;
 import idat.edu.pe.apiPetit.Service.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +45,7 @@ public class AccountServiceImp implements AccountService {
 
         account.setUser(user);
         account.setAccountType(accountType);
+        account.setPass(new BCryptPasswordEncoder().encode(account.getPass()));
         Account newAccount = accountRepository.save(account);
         AccountDTO accountResponse = mappingDTO(newAccount);
 

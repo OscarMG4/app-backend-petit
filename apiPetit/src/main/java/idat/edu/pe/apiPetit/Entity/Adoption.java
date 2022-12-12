@@ -9,7 +9,7 @@ public class Adoption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAdoption;
-    @Column(name = "description", nullable = false, length = 100)
+    @Column(name = "description", nullable = false, length = 400)
     @NotBlank
     private String description;
     @ManyToOne

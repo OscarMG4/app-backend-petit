@@ -7,18 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class PetRestController {
 
     @Autowired
     private PetService petService;
 
     @RequestMapping(path = "/pets/{idTypePet}/create", method = RequestMethod.POST)
-    public ResponseEntity<PetDTO> savePet(@PathVariable(name = "idTypePet") Integer idTypePet, @Valid @RequestBody PetDTO petDTO){
+    public ResponseEntity<PetDTO> savePet(@PathVariable(name = "idTypePet") Integer idTypePet, @RequestBody PetDTO petDTO){
         return new ResponseEntity<>(petService.createPet(idTypePet, petDTO), HttpStatus.CREATED);
     }
 
@@ -37,13 +36,13 @@ public class PetRestController {
         return petService.showPetsByType(petType);
     }
 
-    @RequestMapping(path = "/pets/{petTypeId}/{id}", method = RequestMethod.GET)
-    public ResponseEntity<PetDTO> showPetId(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id){
-        return new ResponseEntity<>(petService.showPetsId(petTypeId, id), HttpStatus.OK);
+    @RequestMapping(path = "/pets/{id}", method = RequestMethod.GET)
+    public ResponseEntity<PetDTO> showPetId(@PathVariable(name = "id") Integer id){
+        return new ResponseEntity<>(petService.showPetsId(id), HttpStatus.OK);
     }
 
     @RequestMapping(path = "/pets/{petTypeId}/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<PetDTO> updatePet(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id, @Valid @RequestBody PetDTO petDTO){
+    public ResponseEntity<PetDTO> updatePet(@PathVariable(name = "petTypeId") Integer petTypeId, @PathVariable(name = "id") Integer id, @RequestBody PetDTO petDTO){
         PetDTO petResponse = petService.updatePet(petDTO, id, petTypeId);
         return new ResponseEntity<>(petResponse, HttpStatus.OK);
     }

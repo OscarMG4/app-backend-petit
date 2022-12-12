@@ -10,7 +10,7 @@ public interface PetService {
     List<PetDTO> showPets();
     List<PetDTO> showPetsByTypeId(@Param("idPetType") Integer petTypeId);
     List<PetDTO> showPetsByType(@Param("petType") String petType);
-    PetDTO showPetsId(Integer petTypeId, Integer id);
+    PetDTO showPetsId(Integer id);
     PetDTO updatePet(PetDTO petDTO, Integer id, Integer petTypeId);
     void deletePet(Integer petTypeId, Integer id);
 

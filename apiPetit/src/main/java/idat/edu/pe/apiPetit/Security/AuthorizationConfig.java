@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,11 +28,14 @@ import java.util.Map;
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
-    private TokenStore tokenStore;
+    private JwtTokenStore tokenStore;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtAccessTokenConverter accessTokenConverter;
+
+    @Autowired
+    private AccountDetailService service;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -45,13 +49,15 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token")
                 .scopes("read", "write", "trust")
                 .accessTokenValiditySeconds(1*60*60)
+//                .accessTokenValiditySeconds(60)
+//                .refreshTokenValiditySeconds(2 * 60);
                 .refreshTokenValiditySeconds(5*60*60);
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         TokenEnhancerChain chain = new TokenEnhancerChain();
-        //Role role = new Role();
+        Role role = new Role();
         chain.setTokenEnhancers(Arrays.asList(new TokenEnhancer() {
             @Override
             public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
@@ -67,6 +73,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         endpoints.tokenStore(tokenStore)
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(accessTokenConverter)
+                .userDetailsService(service)
                 .tokenEnhancer(chain);
     }
 }
